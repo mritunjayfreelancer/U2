@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forX Learner - Ultimate Pro Drag Studio</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Noto+Sans+Devanagari:wght@600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- html2canvas for 4K Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+        }
+
+        body {
+            background: #121212;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Top Bar */
+        .top-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1e1e1e;
+            padding: 10px 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .nav-title {
+            color: #ffc837;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* Control Panel */
+        .control-box {
+            background: #1e1e1e;
+            padding: 14px;
+            border-radius: 14px;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-box label {
+            font-size: 11px;
+            color: #ffc837;
+            font-weight: 700;
+        }
+
+        .control-box select,
+        .control-box input {
+            width: 100%;
+            background: #2b2b2b;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 8px;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+
+        .studio-btn {
+            background: #3182ce;
+            color: #fff;
+            border: none;
+            padding: 9px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .studio-btn.add {
+            background: #38a169;
+        }
+
+        .studio-btn.delete {
+            background: #e53e3e;
+        }
+
+        .studio-btn.download {
+            background: #00b050;
+            grid-column: span 2;
+            font-size: 14px;
+        }
+
+        .studio-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* --- POSTER CANVAS --- */
+        .poster-container {
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            background: linear-gradient(180deg, #4a3d7a 0%, #302456 50%, #1e153b 100%);
+            border-radius: 28px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+        }
+
+        /* Draggable & Selectable Elements */
+        .poster-element {
+            position: absolute;
+            cursor: move;
+            user-select: none;
+            padding: 6px 10px;
+            border: 2px dashed transparent;
+            transition: border-color 0.1s;
+        }
+
+        .poster-element:hover,
+        .poster-element.selected {
+            border-color: #ff9900;
+            background: rgba(255, 153, 0, 0.15);
+            z-index: 999;
+        }
+
+        /* Styles */
+        .el-logo {
+            background: #000;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .el-logo span {
+            color: #ffc837;
+        }
+
+        .el-badge {
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+
+        .el-challenge {
+            background: #ffe600;
+            color: #111;
+            font-size: 16px;
+            font-weight: 900;
+            padding: 4px 22px;
+            border-radius: 50px;
+            transform: rotate(-2deg);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .el-mainheading {
+            color: #ffffff;
+            font-size: 21px;
+            font-weight: 900;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        .el-hook {
+            background: #ff0055;
+            color: #fff;
+            font-weight: 800;
+            font-size: 12px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
+            text-align: center;
+        }
+
+        .el-listcard {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 22px;
+            padding: 12px;
+            width: 90%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .list-item {
+            background: #ffffff;
+            border: 2px solid #e1e8ed;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 800;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .list-num {
+            width: 24px;
+            height: 24px;
+            background: #6a11cb;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .el-footerbox {
+            background: #09101f;
+            border-radius: 40px;
+            text-align: center;
+            padding: 8px;
+            color: #fff;
+            width: 85%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .el-footerbox .f-main {
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            display: block;
+        }
+
+        .el-footerbox .f-sub {
+            color: #ffc837;
+            font-weight: 800;
+            font-size: 9px;
+        }
+
+        .el-ig {
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            text-align: center;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <!-- Top Bar -->
+        <div class="top-nav-bar">
+            <a href="../index.html" class="home-btn">🏠 Home</a>
+            <span class="nav-title">Pro Drag & Drop Studio</span>
+        </div>
+
+        <!-- Controls -->
+        <div class="control-box">
+            <label>🎨 Select Background Theme:</label>
+            <select id="gradientSelect">
+                <option value="linear-gradient(180deg, #4a3d7a 0%, #302456 50%, #1e153b 100%)">Royal Purple (Default)
+                </option>
+                <option value="linear-gradient(135deg, #0f2027, #203a43, #2c5364)">Deep Ocean Dark</option>
+                <option value="linear-gradient(135deg, #ff416c, #ff4b2b)">Sunset Neon Fire</option>
+                <option value="linear-gradient(135deg, #11998e, #38ef7d)">Fresh Mint Emerald</option>
+                <option value="linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)">Instagram Vibrant Glow</option>
+                <option value="linear-gradient(135deg, #2b5876, #4e4376)">Royal Blue Indigo</option>
+            </select>
+
+            <label>✏️ Live Edit Text (Click any poster element first):</label>
+            <input type="text" id="liveTextInput" placeholder="Click any text on poster to edit...">
+
+            <div class="btn-grid">
+                <button class="studio-btn add" onclick="addCardItem()">➕ Add List Item</button>
+                <button class="studio-btn delete" onclick="deleteSelectedElement()">🗑️ Delete Selected</button>
+                <button class="studio-btn" onclick="alignCenter()">↔️ Center Align</button>
+                <button class="studio-btn" onclick="resetLayout()">🔄 Reset</button>
+                <button class="studio-btn download" onclick="download4K()">📥 Download 4K Poster Image</button>
+            </div>
+        </div>
+
+        <!-- POSTER CANVAS -->
+        <div class="poster-container" id="posterArea">
+
+            <!-- 1. Logo -->
+            <div class="poster-element el-logo" id="el-logo" style="top: 15px; left: 15px;" contenteditable="true">
+                for<span>X</span> Learner</div>
+
+            <!-- 2. Tagline Badge -->
+            <div class="poster-element el-badge" id="el-badge" style="top: 18px; right: 15px;" contenteditable="true">✨
+                Better English</div>
+
+            <!-- 3. Challenge Header -->
+            <div class="poster-element el-challenge" id="el-challenge"
+                style="top: 62px; left: 50%; transform: translateX(-50%);" contenteditable="true">ENGLISH CHALLENGE
+            </div>
+
+            <!-- 4. Main Heading -->
+            <div class="poster-element el-mainheading" id="el-mainheading"
+                style="top: 108px; left: 50%; transform: translateX(-50%); width: 100%;" contenteditable="true">Can You
+                Solve This?</div>
+
+            <!-- 5. Hook Message -->
+            <div class="poster-element el-hook" id="el-hook" style="top: 148px; left: 50%; transform: translateX(-50%);"
+                contenteditable="true">🔥 90% Log Galat Jawab Dete Hain!</div>
+
+            <!-- 6. List Card Box -->
+            <div class="poster-element el-listcard" id="el-listcard"
+                style="top: 198px; left: 50%; transform: translateX(-50%);">
+                <div class="list-item">
+                    <div class="list-num">1</div><span contenteditable="true">Rule 1: Always use correct grammar
+                        verbs.</span>
+                </div>
+                <div class="list-item">
+                    <div class="list-num">2</div><span contenteditable="true">Rule 2: Focus on daily vocabulary
+                        building.</span>
+                </div>
+                <div class="list-item">
+                    <div class="list-num">3</div><span contenteditable="true">Rule 3: Practice speaking English
+                        regularly.</span>
+                </div>
+                <div class="list-item">
+                    <div class="list-num">4</div><span contenteditable="true">Rule 4: Listen to native speaker
+                        podcasts.</span>
+                </div>
+                <div class="list-item">
+                    <div class="list-num">5</div><span contenteditable="true">Rule 5: Never hesitate to make
+                        mistakes.</span>
+                </div>
+            </div>
+
+            <!-- 7. Footer Follow Box -->
+            <div class="poster-element el-footerbox" id="el-footerbox"
+                style="bottom: 42px; left: 50%; transform: translateX(-50%);" contenteditable="true">
+                <span class="f-main">👤 FOLLOW</span>
+                <span class="f-sub">FOR DAILY ENGLISH</span>
+            </div>
+
+            <!-- 8. Instagram Handle -->
+            <div class="poster-element el-ig" id="el-ig" style="bottom: 12px; left: 50%; transform: translateX(-50%);"
+                contenteditable="true">📷 @forxlearner</div>
+
+        </div>
+    </div>
+
+    <script>
+        const liveTextInput = document.getElementById('liveTextInput');
+        const posterArea = document.getElementById('posterArea');
+        let selectedElements = new Set();
+        let activeElement = null;
+
+        // Background Theme Switcher
+        document.getElementById('gradientSelect').addEventListener('change', (e) => {
+            posterArea.style.background = e.target.value;
+        });
+
+        // Selection with Shift key support
+        posterArea.addEventListener('click', (e) => {
+            const el = e.target.closest('.poster-element');
+            if (!el) return;
+
+            if (e.shiftKey) {
+                if (selectedElements.has(el)) {
+                    selectedElements.delete(el);
+                    el.classList.remove('selected');
+                } else {
+                    selectedElements.add(el);
+                    el.classList.add('selected');
+                }
+            } else {
+                document.querySelectorAll('.poster-element').forEach(item => {
+                    item.classList.remove('selected');
+                });
+                selectedElements.clear();
+                selectedElements.add(el);
+                el.classList.add('selected');
+                activeElement = el;
+                liveTextInput.value = el.innerText.trim();
+            }
+        });
+
+        liveTextInput.addEventListener('input', () => {
+            if (activeElement) {
+                activeElement.innerText = liveTextInput.value;
+            }
+        });
+
+        // Free Drag and Drop for Multiple Selected Elements (X & Y axis)
+        let isDragging = false;
+        let startX, startY;
+        let elementStarts = new Map();
+
+        document.addEventListener('mousedown', (e) => {
+            const el = e.target.closest('.poster-element');
+            if (!el) return;
+
+            if (!selectedElements.has(el)) {
+                if (!e.shiftKey) {
+                    document.querySelectorAll('.poster-element').forEach(item => item.classList.remove('selected'));
+                    selectedElements.clear();
+                }
+                selectedElements.add(el);
+                el.classList.add('selected');
+                activeElement = el;
+                liveTextInput.value = el.innerText.trim();
+            }
+
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+
+            elementStarts.clear();
+            const parentRect = posterArea.getBoundingClientRect();
+
+            selectedElements.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                elementStarts.set(item, {
+                    left: rect.left - parentRect.left,
+                    top: rect.top - parentRect.top
+                });
+                item.style.transform = 'none';
+            });
+
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+
+            selectedElements.forEach(item => {
+                const start = elementStarts.get(item);
+                if (start) {
+                    item.style.left = (start.left + dx) + 'px';
+                    item.style.top = (start.top + dy) + 'px';
+                }
+            });
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Add new list item inside active list card
+        function addCardItem() {
+            const listCard = document.getElementById('el-listcard');
+            if (!listCard) {
+                alert('List card available nahi hai!');
+                return;
+            }
+            const itemsCount = listCard.querySelectorAll('.list-item').length + 1;
+            const newItem = document.createElement('div');
+            newItem.className = 'list-item';
+            newItem.innerHTML = `<div class="list-num">${itemsCount}</div><span contenteditable="true">New rule item here...</span>`;
+            listCard.appendChild(newItem);
+        }
+
+        // Delete selected element
+        function deleteSelectedElement() {
+            selectedElements.forEach(el => {
+                if (el.id !== 'el-logo') el.remove();
+            });
+            selectedElements.clear();
+        }
+
+        // Center align selected elements
+        function alignCenter() {
+            const parentWidth = posterArea.offsetWidth;
+            selectedElements.forEach(item => {
+                const itemWidth = item.offsetWidth;
+                item.style.left = ((parentWidth - itemWidth) / 2) + 'px';
+                item.style.transform = 'none';
+            });
+        }
+
+        // 4K Download
+        function download4K() {
+            document.querySelectorAll('.poster-element').forEach(item => item.classList.remove('selected'));
+            html2canvas(posterArea, {
+                scale: 4,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'forX-learner-Custom-Poster.png';
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+            });
+        }
+
+        function resetLayout() {
+            location.reload();
+        }
+    </script>
+</body>
+
+</html>

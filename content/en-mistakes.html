@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 5 Common English Mistakes - forX learner</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Noto+Sans+Devanagari:wght@600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- html2canvas for 4K Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+        }
+
+        body {
+            background: #121212;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Top Navigation Bar */
+        .top-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1e1e1e;
+            padding: 10px 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 3px 10px rgba(0, 123, 255, 0.4);
+            transition: 0.2s;
+        }
+
+        .home-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .nav-title {
+            color: #ffc837;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .control-box {
+            background: #1e1e1e;
+            padding: 12px;
+            border-radius: 12px;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-box label {
+            display: block;
+            font-size: 11px;
+            color: #ffc837;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .control-box textarea {
+            width: 100%;
+            height: 110px;
+            background: #2b2b2b;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 8px;
+            font-size: 11px;
+            resize: none;
+            outline: none;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .download-btn {
+            width: 100%;
+            background: #00b050;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 176, 80, 0.3);
+        }
+
+        .download-btn:hover {
+            opacity: 0.95;
+        }
+
+        /* 9:16 Shorts / Reels Ratio Poster - Fully Filled, Large Fonts */
+        .poster-container {
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            background: linear-gradient(180deg, #4a00e0 0%, #8e2de2 40%, #ff416c 100%);
+            border-radius: 28px;
+            padding: 16px 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+        }
+
+        /* Top Header Styling (Bigger Fonts) */
+        .header-section {
+            text-align: center;
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .logo-badge {
+            background: #0d1b2a;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-badge span {
+            color: #ffc837;
+        }
+
+        .tagline-badge {
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .title-top-badge {
+            background: #ffe600;
+            color: #111;
+            font-size: 22px;
+            font-weight: 900;
+            display: inline-block;
+            padding: 2px 26px;
+            border-radius: 50px;
+            transform: rotate(-2deg);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            line-height: 1.2;
+        }
+
+        .title-main-text {
+            color: #ffffff;
+            font-size: 26px;
+            font-weight: 900;
+            margin-top: 2px;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+        }
+
+        .banner-msg-box {
+            background: #ffffff;
+            color: #0d1b2a;
+            font-weight: 900;
+            font-size: 13px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            margin-top: 4px;
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Cards Wrapper for 5 Mistakes with Shift+Click Multi-Select & Drag */
+        .cards-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .mistake-card-item {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 9px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.15s ease, background 0.15s ease, border 0.15s ease;
+            border: 2px solid transparent;
+        }
+
+        .mistake-card-item:active {
+            cursor: grabbing;
+        }
+
+        .mistake-card-item.selected {
+            background: #fff8e7;
+            border: 2px solid #ff9900;
+            box-shadow: 0 0 15px rgba(255, 153, 0, 0.6);
+        }
+
+        .mistake-card-item.dragging {
+            opacity: 0.4;
+            background: #e0e0e0;
+        }
+
+        .card-number-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #6a11cb;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 900;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .mistake-card-item:nth-child(1) .card-number-badge {
+            background: #6a11cb;
+        }
+
+        .mistake-card-item:nth-child(2) .card-number-badge {
+            background: #ff0844;
+        }
+
+        .mistake-card-item:nth-child(3) .card-number-badge {
+            background: #ff9900;
+        }
+
+        .mistake-card-item:nth-child(4) .card-number-badge {
+            background: #00b050;
+        }
+
+        .mistake-card-item:nth-child(5) .card-number-badge {
+            background: #007bff;
+        }
+
+        .content-box {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex-grow: 1;
+            min-width: 0;
+        }
+
+        /* Larger Bold Fonts for Sentences & Hindi */
+        .wrong-line {
+            font-size: 13px;
+            font-weight: 800;
+            color: #d90429;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .correct-line {
+            font-size: 13px;
+            font-weight: 900;
+            color: #1b4332;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .hindi-line {
+            font-size: 12px;
+            font-weight: 800;
+            color: #343a40;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Footer Section */
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .follow-card-box {
+            background: #0d1b2a;
+            border-radius: 40px;
+            text-align: center;
+            padding: 8px;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .follow-card-box .main-text {
+            font-size: 15px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            display: block;
+            line-height: 1.1;
+        }
+
+        .follow-card-box .sub-text {
+            color: #ffc837;
+            font-weight: 900;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .instagram-id-text {
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <!-- Top Navigation Bar -->
+        <div class="top-nav-bar">
+            <a href="../index.html" class="home-btn">🏠 Home</a>
+            <span class="nav-title">ForX Learner Studio</span>
+        </div>
+
+        <!-- Control Box -->
+        <div class="control-box">
+            <label>💡 Shift + Click करके कई कार्ड्स एक साथ सेलेक्ट करें और ड्रैग करके रीऑर्डर करें!</label>
+            <textarea id="dataInput">1. ❌ I am agree with you. | ✅ I agree with you. | (मैं तुमसे सहमत हूँ।)
+2. ❌ He don't know. | ✅ He doesn't know. | (उसे नहीं पता है।)
+3. ❌ I didn't went there. | ✅ I didn't go there. | (मैं वहाँ नहीं गया।)
+4. ❌ She is more smarter than me. | ✅ She is smarter than me. | (वो मुझसे ज़्यादा स्मार्ट है।)
+5. ❌ I have a one brother. | ✅ I have one brother. | (मेरा एक भाई है।)</textarea>
+            <button class="download-btn" id="downloadBtn">📥 Download 4K Shorts Image</button>
+        </div>
+
+        <!-- Poster Canvas (9:16 Shorts Ratio) -->
+        <div class="poster-container" id="posterArea">
+            <!-- Header -->
+            <div class="header-section">
+                <div class="top-row">
+                    <div class="logo-badge">for<span>X</span> learner</div>
+                    <div class="tagline-badge">✨ Daily English Tips</div>
+                </div>
+                <div class="title-top-badge">Top 5</div>
+                <div class="title-main-text">Common English Mistakes</div>
+                <div class="banner-msg-box">❌ In galtiyon ko sudharo!</div>
+            </div>
+
+            <!-- Cards with Shift+Click Multi-Select & Drag -->
+            <div class="cards-wrapper" id="cardsList">
+                <div class="mistake-card-item" draggable="true" data-index="0">
+                    <div class="card-number-badge">1</div>
+                    <div class="content-box">
+                        <div class="wrong-line">❌ I am agree with you.</div>
+                        <div class="correct-line">✅ I agree with you.</div>
+                        <div class="hindi-line">(मैं तुमसे सहमत हूँ।)</div>
+                    </div>
+                </div>
+                <div class="mistake-card-item" draggable="true" data-index="1">
+                    <div class="card-number-badge">2</div>
+                    <div class="content-box">
+                        <div class="wrong-line">❌ He don't know.</div>
+                        <div class="correct-line">✅ He doesn't know.</div>
+                        <div class="hindi-line">(उसे नहीं पता है।)</div>
+                    </div>
+                </div>
+                <div class="mistake-card-item" draggable="true" data-index="2">
+                    <div class="card-number-badge">3</div>
+                    <div class="content-box">
+                        <div class="wrong-line">❌ I didn't went there.</div>
+                        <div class="correct-line">✅ I didn't go there.</div>
+                        <div class="hindi-line">(मैं वहाँ नहीं गया।)</div>
+                    </div>
+                </div>
+                <div class="mistake-card-item" draggable="true" data-index="3">
+                    <div class="card-number-badge">4</div>
+                    <div class="content-box">
+                        <div class="wrong-line">❌ She is more smarter than me.</div>
+                        <div class="correct-line">✅ She is smarter than me.</div>
+                        <div class="hindi-line">(वो मुझसे ज़्यादा स्मार्ट है।)</div>
+                    </div>
+                </div>
+                <div class="mistake-card-item" draggable="true" data-index="4">
+                    <div class="card-number-badge">5</div>
+                    <div class="content-box">
+                        <div class="wrong-line">❌ I have a one brother.</div>
+                        <div class="correct-line">✅ I have one brother.</div>
+                        <div class="hindi-line">(मेरा एक भाई है।)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer-section">
+                <div class="follow-card-box">
+                    <span class="main-text">👤 FOLLOW</span>
+                    <span class="sub-text">FOR DAILY ENGLISH</span>
+                </div>
+                <div class="instagram-id-text">📷 @forxlearner</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const inputArea = document.getElementById('dataInput');
+        const cardsList = document.getElementById('cardsList');
+
+        // Update textarea from current DOM card order
+        function updateTextareaFromDOM() {
+            const items = cardsList.querySelectorAll('.mistake-card-item');
+            let textLines = [];
+            items.forEach((item, idx) => {
+                const wrong = item.querySelector('.wrong-line').innerText;
+                const correct = item.querySelector('.correct-line').innerText;
+                const hindi = item.querySelector('.hindi-line').innerText;
+                textLines.push(`${idx + 1}. ${wrong} | ${correct} | ${hindi}`);
+                item.querySelector('.card-number-badge').innerText = idx + 1;
+            });
+            inputArea.value = textLines.join('\n');
+        }
+
+        // Live updating DOM when user types in textarea
+        inputArea.addEventListener('input', () => {
+            const lines = inputArea.value.split('\n');
+            const items = cardsList.querySelectorAll('.mistake-card-item');
+            lines.forEach((line, index) => {
+                if (index < items.length) {
+                    const parts = line.split('|');
+                    if (parts.length >= 3) {
+                        items[index].querySelector('.wrong-line').innerText = parts[0].replace(/^\d+\.\s*/, '').trim();
+                        items[index].querySelector('.correct-line').innerText = parts[1].trim();
+                        items[index].querySelector('.hindi-line').innerText = parts[2].trim();
+                    }
+                }
+            });
+        });
+
+        // Shift + Click Multi-Select & Drag Reordering Logic
+        let lastClickedCard = null;
+
+        cardsList.addEventListener('click', (e) => {
+            const card = e.target.closest('.mistake-card-item');
+            if (!card) return;
+
+            if (e.shiftKey && lastClickedCard) {
+                const cards = Array.from(cardsList.querySelectorAll('.mistake-card-item'));
+                const start = cards.indexOf(lastClickedCard);
+                const end = cards.indexOf(card);
+                const range = [start, end].sort((a, b) => a - b);
+
+                for (let i = range[0]; i <= range[1]; i++) {
+                    cards[i].classList.add('selected');
+                }
+            } else {
+                if (!e.ctrlKey && !e.metaKey) {
+                    cardsList.querySelectorAll('.mistake-card-item').forEach(c => c.classList.remove('selected'));
+                }
+                card.classList.toggle('selected');
+                lastClickedCard = card;
+            }
+        });
+
+        let draggedItem = null;
+
+        cardsList.addEventListener('dragstart', (e) => {
+            draggedItem = e.target.closest('.mistake-card-item');
+            if (draggedItem) {
+                if (!draggedItem.classList.contains('selected')) {
+                    cardsList.querySelectorAll('.mistake-card-item').forEach(c => c.classList.remove('selected'));
+                    draggedItem.classList.add('selected');
+                }
+                setTimeout(() => draggedItem.classList.add('dragging'), 0);
+            }
+        });
+
+        cardsList.addEventListener('dragend', (e) => {
+            cardsList.querySelectorAll('.mistake-card-item').forEach(item => {
+                item.classList.remove('dragging');
+            });
+            draggedItem = null;
+            updateTextareaFromDOM();
+        });
+
+        cardsList.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const afterElement = getDragAfterElement(cardsList, e.clientY);
+            const selectedItems = cardsList.querySelectorAll('.selected');
+
+            selectedItems.forEach(item => {
+                if (afterElement == null) {
+                    cardsList.appendChild(item);
+                } else {
+                    cardsList.insertBefore(item, afterElement);
+                }
+            });
+        });
+
+        function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.mistake-card-item:not(.selected)')];
+
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        // 4K Download Handler
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            // Temporarily clear selections for clean screenshot
+            cardsList.querySelectorAll('.mistake-card-item').forEach(c => c.classList.remove('selected'));
+
+            const poster = document.getElementById('posterArea');
+            html2canvas(poster, {
+                scale: 4,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'Top-5-Common-English-Mistakes.png';
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+            });
+        });
+    </script>
+</body>
+
+</html>

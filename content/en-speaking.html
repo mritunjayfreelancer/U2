@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 3 Daily English - forX learner Studio</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Noto+Sans+Devanagari:wght@600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- html2canvas for 4K Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+        }
+
+        body {
+            background: #121212;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Top Bar */
+        .top-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1e1e1e;
+            padding: 10px 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .nav-title {
+            color: #ffc837;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* Control Panel */
+        .control-box {
+            background: #1e1e1e;
+            padding: 14px;
+            border-radius: 14px;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-box label {
+            font-size: 11px;
+            color: #ffc837;
+            font-weight: 700;
+        }
+
+        .control-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .control-box select,
+        .control-box textarea {
+            width: 100%;
+            background: #2b2b2b;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 8px;
+            font-size: 11px;
+            outline: none;
+        }
+
+        .control-box textarea {
+            height: 90px;
+            resize: none;
+            line-height: 1.3;
+        }
+
+        .download-btn {
+            width: 100%;
+            background: #00b050;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 176, 80, 0.3);
+            text-align: center;
+        }
+
+        .download-btn:hover {
+            opacity: 0.95;
+        }
+
+        /* --- POSTER CONTAINER (9:16 Shorts Ratio) --- */
+        .poster-container {
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            background: linear-gradient(180deg, #512da8 0%, #673ab7 35%, #e91e63 100%);
+            border-radius: 28px;
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+
+        /* Top Header Styling[cite: 3] */
+        .header-section {
+            text-align: center;
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logo-badge {
+            background: #0d1b2a;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-badge span {
+            color: #ffc837;
+        }
+
+        .tagline-badge {
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .title-top-badge {
+            background: #ffe600;
+            color: #111;
+            font-size: 24px;
+            font-weight: 900;
+            display: inline-block;
+            padding: 2px 28px;
+            border-radius: 50px;
+            transform: rotate(-2deg);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            line-height: 1.2;
+        }
+
+        .title-main-text {
+            color: #ffffff;
+            font-size: 26px;
+            font-weight: 900;
+            margin-top: 4px;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+        }
+
+        .banner-msg-box {
+            background: #ffffff;
+            color: #0d1b2a;
+            font-weight: 900;
+            font-size: 13px;
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-top: 8px;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Cards Wrapper[cite: 3] */
+        .cards-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sentence-card-item {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .card-number-badge {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #6a11cb;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 17px;
+            font-weight: 900;
+            flex-shrink: 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .sentence-card-item:nth-child(1) .card-number-badge {
+            background: #6a11cb;
+        }
+
+        .sentence-card-item:nth-child(2) .card-number-badge {
+            background: #ff0844;
+        }
+
+        .sentence-card-item:nth-child(3) .card-number-badge {
+            background: #ff9900;
+        }
+
+        .rows-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 0;
+        }
+
+        .single-row {
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            border-radius: 25px;
+            gap: 8px;
+        }
+
+        .single-row.english-row {
+            background: #e3f2fd;
+        }
+
+        .single-row.uchharan-row {
+            background: #e2f9e9;
+        }
+
+        .single-row.hindi-row {
+            background: #ffe6ed;
+        }
+
+        .action-icon-btn {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #007bff;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            flex-shrink: 0;
+            border: none;
+        }
+
+        .single-row.uchharan-row .action-icon-btn {
+            background: #00b050;
+        }
+
+        .single-row.hindi-row .action-icon-btn {
+            background: #ff0055;
+        }
+
+        .row-badge-label {
+            font-size: 10px;
+            font-weight: 800;
+            color: #fff;
+            background: #007bff;
+            padding: 2px 8px;
+            border-radius: 10px;
+            min-width: 65px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .single-row.uchharan-row .row-badge-label {
+            background: #00b050;
+        }
+
+        .single-row.hindi-row .row-badge-label {
+            background: #ff0055;
+        }
+
+        .row-text-content {
+            font-size: 13px;
+            font-weight: 800;
+            color: #111;
+            white-space: nowrap;
+            overflow: hidden;
+            text-align: left;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        .single-row.english-row .row-text-content {
+            font-size: 14px;
+            font-weight: 900;
+            color: #0d1b2a;
+        }
+
+        /* Footer Section[cite: 3] */
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .follow-card-box {
+            background: #0d1b2a;
+            border-radius: 40px;
+            text-align: center;
+            padding: 10px;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .follow-card-box .main-text {
+            font-size: 15px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            display: block;
+            line-height: 1.1;
+        }
+
+        .follow-card-box .sub-text {
+            color: #ffc837;
+            font-weight: 900;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .instagram-id-text {
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <!-- Top Nav -->
+        <div class="top-nav-bar">
+            <a href="../index.html" class="home-btn">🏠 Home</a>
+            <span class="nav-title">Top 10 Themes Studio</span>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="control-box">
+            <div class="control-row">
+                <div style="flex:1;">
+                    <label>🌄 Background Theme (Top 10):</label>
+                    <select id="bgThemeSelect">
+                        <option value="linear-gradient(180deg, #512da8 0%, #673ab7 35%, #e91e63 100%)">1. Royal Purple
+                            Neon (Default)</option>
+                        <option value="linear-gradient(180deg, #0f2027 0%, #203a43 50%, #2c5364 100%)">2. Deep Ocean
+                            Dark</option>
+                        <option value="linear-gradient(180deg, #ff416c 0%, #ff4b2b 100%)">3. Sunset Fire Gradient
+                        </option>
+                        <option value="linear-gradient(180deg, #11998e 0%, #38ef7d 100%)">4. Fresh Mint Emerald</option>
+                        <option value="linear-gradient(180deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%)">5. Instagram
+                            Vibrant Glow</option>
+                        <option value="linear-gradient(180deg, #2b5876 0%, #4e4376 100%)">6. Royal Blue Indigo</option>
+                        <option value="linear-gradient(180deg, #134e5e 0%, #71b280 100%)">7. Forest Sage Gradient
+                        </option>
+                        <option value="linear-gradient(180deg, #f12711 0%, #f5af19 100%)">8. Warm Amber Orange</option>
+                        <option value="linear-gradient(180deg, #3a6073 0%, #16222a 100%)">9. Slate Metallic Dark
+                        </option>
+                        <option value="linear-gradient(180deg, #232526 0%, #414345 100%)">10. Pitch Black Carbon
+                        </option>
+                    </select>
+                </div>
+                <div style="flex:1;">
+                    <label>📦 Card Box Theme (Top 10):</label>
+                    <select id="boxThemeSelect">
+                        <option value="clean-white">1. Clean White (Default)</option>
+                        <option value="glass-dark">2. Dark Glassmorphism</option>
+                        <option value="neon-glow">3. Neon Gold Glow</option>
+                        <option value="soft-yellow">4. Soft Cream Yellow</option>
+                        <option value="cyber-blue">5. Cyber Blue Neon</option>
+                        <option value="emerald-box">6. Emerald Subtle Box</option>
+                        <option value="sunset-box">7. Sunset Orange Box</option>
+                        <option value="royal-box">8. Royal Indigo Box</option>
+                        <option value="silver-box">9. Silver Metallic Box</option>
+                        <option value="solid-black">10. Solid Matte Black</option>
+                    </select>
+                </div>
+            </div>
+
+            <label>📝 Content Textarea (Paste all data here):</label>
+            <textarea id="dataInput">English: How are you?
+Pronunciation: हाऊ आर यू?
+Hindi: आप कैसे हैं?
+
+English: What are you doing?
+Pronunciation: वॉट आर यू डूईंग?
+Hindi: आप क्या कर रहे हैं?
+
+English: See you tomorrow.
+Pronunciation: सी यू टुमॉरो।
+Hindi: कल मिलते हैं।</textarea>
+
+            <button class="download-btn" id="downloadBtn">📥 Download 4K Shorts Image</button>
+        </div>
+
+        <!-- POSTER CANVAS (Exact Reference Match[cite: 3]) -->
+        <div class="poster-container" id="posterArea">
+
+            <!-- Header -->
+            <div class="header-section">
+                <div class="top-row">
+                    <div class="logo-badge">for<span>X</span> Learner</div>
+                    <div class="tagline-badge">✨ Better English • Brighter Future</div>
+                </div>
+                <div class="title-top-badge">Top 3</div>
+                <div class="title-main-text">Daily English Sentences</div>
+                <div class="banner-msg-box">📢 Aaj ye 3 sentences bolna seekho!</div>
+            </div>
+
+            <!-- Cards -->
+            <div class="cards-wrapper" id="cardsWrapper">
+                <!-- Card 1 -->
+                <div class="sentence-card-item card-theme-style" id="card1">
+                    <div class="card-number-badge">01</div>
+                    <div class="rows-container">
+                        <div class="single-row english-row">
+                            <button class="action-icon-btn">🔊</button>
+                            <span class="row-badge-label">English</span>
+                            <span class="row-text-content" id="e1">How are you?</span>
+                        </div>
+                        <div class="single-row uchharan-row">
+                            <button class="action-icon-btn">🔊</button>
+                            <span class="row-badge-label">उच्चारण</span>
+                            <span class="row-text-content" id="u1">हाऊ आर यू?</span>
+                        </div>
+                        <div class="single-row hindi-row">
+                            <button class="action-icon-btn">🔊</button>
+                            <span class="row-badge-label">हिंदी में</span>
+                            <span class="row-text-content" id="h1">आप कैसे हैं?</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="sentence-card-item card-theme-style" id="card2">
+                    <div class="card-number-badge">02</div>
+                    <div class="rows-container">
+                        <div class="single-row english-row">
+                            <button class="action-icon-btn">🔊</button>
+                            <span class="row-badge-label">English</span>
+                            <span class="row-text-content" id="e2">What are you doing?</span>
+                        </div>
+                        <div class="single-row uchharan-row">
+                            <button class="action-icon-btn">🔊</button>
+                            <span class="row-badge-label">उच्चारण</span>
+                            <span class="row-text-content" id="u2">वॉट आर यू डूईंग?</span>
+                        </div>
+                        <div class="single-row hindi-row">
+                            <button class="action-icon-btn">🔊</button>
+                            <span class="row-badge-label">हिंदी में</span>
+                            <span class="row-text-content" id="h2">आप क्या कर रहे हैं?</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="sentence-card-item card-theme-style" id="card3">
+                    <div class="card-number-badge">03</div>
+                    <div class="rows-container">
+                        <div class="single-row english-row">
+                            <button class="action-icon-btn">🔊</button>
+                            <span class="row-badge-label">English</span>
+                            <span class="row-text-content" id="e3">See you tomorrow.</span>
+                        </div>
+                        <div class="single-row uchharan-row">
+                            <button class="action-icon-btn">🔊</button>
+                            <span class="row-badge-label">उच्चारण</span>
+                            <span class="row-text-content" id="u3">सी यू टुमॉरो।</span>
+                        </div>
+                        <div class="single-row hindi-row">
+                            <button class="action-icon-btn">🔊</button>
+                            <span class="row-badge-label">हिंदी में</span>
+                            <span class="row-text-content" id="h3">कल मिलते हैं।</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer-section">
+                <div class="follow-card-box">
+                    <span class="main-text">👤 FOLLOW</span>
+                    <span class="sub-text">FOR DAILY ENGLISH</span>
+                </div>
+                <div class="instagram-id-text">📷 @forxlearner</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Background Theme Selector
+        document.getElementById('bgThemeSelect').addEventListener('change', (e) => {
+            document.getElementById('posterArea').style.background = e.target.value;
+        });
+
+        // Box / Card Theme Selector
+        document.getElementById('boxThemeSelect').addEventListener('change', (e) => {
+            const theme = e.target.value;
+            const cards = document.querySelectorAll('.sentence-card-item');
+
+            cards.forEach(card => {
+                // Reset styles
+                card.style.background = '#ffffff';
+                card.style.border = 'none';
+                card.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.2)';
+
+                if (theme === 'glass-dark') {
+                    card.style.background = 'rgba(20, 20, 30, 0.85)';
+                    card.style.border = '1px solid rgba(255,255,255,0.2)';
+                    card.style.backdropFilter = 'blur(10px)';
+                } else if (theme === 'neon-glow') {
+                    card.style.background = '#111';
+                    card.style.border = '2px solid #ffc837';
+                    card.style.boxShadow = '0 0 20px rgba(255,200,55,0.4)';
+                } else if (theme === 'soft-yellow') {
+                    card.style.background = '#fffdf0';
+                    card.style.border = '2px solid #ffe600';
+                } else if (theme === 'cyber-blue') {
+                    card.style.background = '#0a192f';
+                    card.style.border = '2px solid #64ffda';
+                } else if (theme === 'emerald-box') {
+                    card.style.background = '#e6fffa';
+                    card.style.border = '2px solid #319795';
+                } else if (theme === 'sunset-box') {
+                    card.style.background = '#fffaf0';
+                    card.style.border = '2px solid #dd6b20';
+                } else if (theme === 'royal-box') {
+                    card.style.background = '#f3f0ff';
+                    card.style.border = '2px solid #6b46c1';
+                } else if (theme === 'silver-box') {
+                    card.style.background = '#edf2f7';
+                    card.style.border = '2px solid #cbd5e0';
+                } else if (theme === 'solid-black') {
+                    card.style.background = '#000000';
+                    card.style.border = '1px solid #333';
+                }
+            });
+        });
+
+        // Live Textarea Updating
+        const inputArea = document.getElementById('dataInput');
+        inputArea.addEventListener('input', () => {
+            const text = inputArea.value;
+            const lines = text.split('\n');
+            let idx = 1;
+            let eng = "", uch = "", hin = "";
+
+            lines.forEach(l => {
+                const t = l.trim();
+                if (t.toLowerCase().includes('english:')) {
+                    eng = t.split(/english:/i)[1].trim();
+                } else if (t.toLowerCase().includes('pronunciation:') || t.includes('उच्चारण:')) {
+                    uch = t.split(/pronunciation:|उच्चारण:/i)[1].trim();
+                } else if (t.toLowerCase().includes('hindi:') || t.includes('हिंदी में:') || t.toLowerCase().includes('hindi में:')) {
+                    hin = t.split(/hindi:|हिंदी में:|hindi में:/i)[1].trim();
+                    if (idx <= 3) {
+                        if (document.getElementById('e' + idx)) document.getElementById('e' + idx).innerText = eng;
+                        if (document.getElementById('u' + idx)) document.getElementById('u' + idx).innerText = uch;
+                        if (document.getElementById('h' + idx)) document.getElementById('h' + idx).innerText = hin;
+                        idx++;
+                        eng = ""; uch = ""; hin = "";
+                    }
+                }
+            });
+        });
+
+        // 4K Download Handler
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            const poster = document.getElementById('posterArea');
+            html2canvas(poster, {
+                scale: 4,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'Top-3-Daily-English-4K.png';
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Hub - English & Python Learning</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="en-mode"> <!-- Default Mode -->
+
+    <!-- Header / Navigation -->
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-code-branch logo-icon"></i>
+            <span id="logo-text">EnglishHub</span>
+        </div>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="#home" class="nav-item active">Home</a>
+            <a href="#categories" class="nav-item">Categories</a>
+            <a href="#about" class="nav-item">About</a>
+            <a href="#contact" class="nav-item">Contact</a>
+        </nav>
+
+        <!-- Mode Switcher Buttons -->
+        <div class="mode-switcher">
+            <button id="enBtn" class="mode-btn active" onclick="switchMode('en')">EN</button>
+            <button id="pyBtn" class="mode-btn" onclick="switchMode('py')">PY</button>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <span class="badge" id="hero-badge"><i class="fa-solid fa-sparkles"></i> Master the Language</span>
+            <h1 id="hero-title">Elevate Your English Speaking & Writing Skills</h1>
+            <p id="hero-desc">Discover daily lessons, grammar hacks, vocabulary builders, and expert content creation
+                tips to fluent communication.</p>
+            <div class="hero-btns">
+                <a href="#categories" class="btn-primary" id="btn-explore">Explore Categories</a>
+                <a href="#contact" class="btn-secondary" id="btn-subscribe">Contact Me</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="card-glass" id="hero-card">
+                <i class="fa-solid fa-book-open-reader floating-icon" id="card-icon"></i>
+                <h3 id="card-title">Daily English Challenge</h3>
+                <p id="card-desc">Learn 5 new advanced words everyday and level up your fluency.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories-section">
+        <h2 class="section-title" id="categories-heading">Explore All Categories</h2>
+        <div class="categories-grid" id="categoriesGrid">
+            <!-- Dynamically populated via JavaScript -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <div class="about-badge"><i class="fa-solid fa-circle-info"></i> About Creator Hub</div>
+            <h2 class="section-title">Empowering Creators & Learners</h2>
+            <p id="about-desc">Creator Hub is built specifically for content creators and students. Whether you want to
+                master English grammar or conquer Python programming, we provide clean structures, interactive modules,
+                and resources to grow your channel fast.</p>
+            <div class="about-features">
+                <div class="about-pill"><i class="fa-solid fa-check"></i> 100% Mobile Responsive</div>
+                <div class="about-pill"><i class="fa-solid fa-check"></i> Dual EN/PY Modes</div>
+                <div class="about-pill"><i class="fa-solid fa-check"></i> Ready-to-use Categories</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <div class="about-badge" style="background: var(--badge-bg); color: var(--badge-text);"><i
+                    class="fa-solid fa-share-nodes"></i> Get Connected</div>
+            <h2 class="section-title" id="social-heading">Connect With English Creator</h2>
+            <p id="social-desc">Want to connect or follow my daily content? Visit my social media profiles below!</p>
+
+            <div class="social-links-grid" id="socialLinksGrid">
+                <!-- Dynamically populated via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p id="footer-text">&copy; 2026 EnglishHub. All rights reserved.</p>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
