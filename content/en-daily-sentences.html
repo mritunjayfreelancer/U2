@@ -95,6 +95,37 @@
             margin-bottom: 8px;
         }
 
+        .size-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .size-controls select,
+        .size-controls input {
+            min-width: 0;
+            width: 100%;
+            background: #2b2b2b;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 9px 8px;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .custom-size {
+            display: none;
+            grid-column: 1 / -1;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .custom-size.visible {
+            display: grid;
+        }
+
         .download-btn {
             width: 100%;
             background: #00b050;
@@ -390,7 +421,26 @@ Hindi: आप क्या कर रहे हैं?
 03. English: See you tomorrow.
 Pronunciation: सी यू टुमॉरो।
 Hindi: कल मिलते हैं।</textarea>
-            <button class="download-btn" id="downloadBtn">📥 Download 4K Shorts Image</button>
+            <div class="size-controls">
+                <select id="formatSelect" aria-label="Download image format">
+                    <option value="reel">Instagram Reel / Story · 1080 × 1920</option>
+                    <option value="portrait">Instagram Portrait Post · 1080 × 1350</option>
+                    <option value="square">Instagram Square Post · 1080 × 1080</option>
+                    <option value="facebook">Facebook Reel / Video · 1080 × 1920</option>
+                    <option value="landscape">Facebook Post · 1200 × 630</option>
+                    <option value="custom">Custom image size</option>
+                </select>
+                <div id="sizeReadout"
+                    style="display:flex;align-items:center;justify-content:center;color:#ffc837;font-size:12px;font-weight:700">
+                    1080 × 1920 px</div>
+                <div class="custom-size" id="customSize">
+                    <input id="customWidth" type="number" min="320" max="6000" value="1080" placeholder="Width px"
+                        aria-label="Custom image width">
+                    <input id="customHeight" type="number" min="320" max="6000" value="1920" placeholder="Height px"
+                        aria-label="Custom image height">
+                </div>
+            </div>
+            <button class="download-btn" id="downloadBtn">📥 Download Image (PNG)</button>
         </div>
 
         <!-- Poster Canvas -->
@@ -513,19 +563,103 @@ Hindi: कल मिलते हैं।</textarea>
             });
         });
 
-        document.getElementById('downloadBtn').addEventListener('click', () => {
-            const poster = document.getElementById('posterArea');
-            html2canvas(poster, {
-                scale: 4,
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: null
-            }).then(canvas => {
+        // Export the original poster composition without changing its design.
+        // For different aspect ratios, the entire poster is fitted inside the selected canvas,
+        // so no text/cards/footer are stretched, clipped, or rearranged.
+        const formatSelect = document.getElementById('formatSelect');
+        const customSize = document.getElementById('customSize');
+        const sizeReadout = document.getElementById('sizeReadout');
+        const formats = {
+            reel: [1080, 1920],
+            portrait: [1080, 1350],
+            square: [1080, 1080],
+            facebook: [1080, 1920],
+            landscape: [1200, 630]
+        };
+
+        function getOutputSize() {
+            if (formatSelect.value === 'custom') {
+                const w = Number(document.getElementById('customWidth').value);
+                const h = Number(document.getElementById('customHeight').value);
+                if (!Number.isInteger(w) || !Number.isInteger(h) || w < 320 || h < 320 || w > 6000 || h > 6000) {
+                    throw new Error('Custom width and height must be between 320 and 6000 pixels.');
+                }
+                return [w, h];
+            }
+            return formats[formatSelect.value] || formats.reel;
+        }
+
+        function updateSizeReadout() {
+            const isCustom = formatSelect.value === 'custom';
+            customSize.classList.toggle('visible', isCustom);
+            try {
+                const [w, h] = getOutputSize();
+                sizeReadout.textContent = `${w} × ${h} px`;
+            } catch (_) {
+                sizeReadout.textContent = '320–6000 px';
+            }
+        }
+        formatSelect.addEventListener('change', updateSizeReadout);
+        document.getElementById('customWidth').addEventListener('input', updateSizeReadout);
+        document.getElementById('customHeight').addEventListener('input', updateSizeReadout);
+        updateSizeReadout();
+
+        document.getElementById('downloadBtn').addEventListener('click', async () => {
+            const button = document.getElementById('downloadBtn');
+            const oldText = button.textContent;
+            button.disabled = true;
+            button.textContent = '⏳ Preparing PNG…';
+            try {
+                const [outW, outH] = getOutputSize();
+                await document.fonts.ready;
+                const poster = document.getElementById('posterArea');
+                const sourceCanvas = await html2canvas(poster, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: false,
+                    backgroundColor: null,
+                    logging: false
+                });
+
+                const output = document.createElement('canvas');
+                output.width = outW;
+                output.height = outH;
+                const ctx = output.getContext('2d');
+
+                // Match the poster's original purple-to-pink gradient across the target canvas.
+                const bg = ctx.createLinearGradient(0, 0, 0, outH);
+                bg.addColorStop(0, '#4a00e0');
+                bg.addColorStop(0.4, '#8e2de2');
+                bg.addColorStop(1, '#ff416c');
+                ctx.fillStyle = bg;
+                ctx.fillRect(0, 0, outW, outH);
+
+                // Contain-fit keeps the complete original 9:16 poster intact at every ratio.
+                const scale = Math.min(outW / sourceCanvas.width, outH / sourceCanvas.height);
+                const drawW = Math.round(sourceCanvas.width * scale);
+                const drawH = Math.round(sourceCanvas.height * scale);
+                const x = Math.round((outW - drawW) / 2);
+                const y = Math.round((outH - drawH) / 2);
+                ctx.drawImage(sourceCanvas, x, y, drawW, drawH);
+
+                const blob = await new Promise((resolve, reject) => {
+                    output.toBlob(b => b ? resolve(b) : reject(new Error('PNG creation failed')), 'image/png');
+                });
+                const url = URL.createObjectURL(blob);
                 const link = document.createElement('a');
-                link.download = 'Top-3-Daily-English.png';
-                link.href = canvas.toDataURL('image/png', 1.0);
+                link.href = url;
+                link.download = `ForX-Learner-${outW}x${outH}.png`;
+                document.body.appendChild(link);
                 link.click();
-            });
+                link.remove();
+                setTimeout(() => URL.revokeObjectURL(url), 1500);
+            } catch (error) {
+                console.error(error);
+                alert(error.message || 'Image export nahi ho saka. Dobara try karein.');
+            } finally {
+                button.disabled = false;
+                button.textContent = oldText;
+            }
         });
     </script>
 </body>

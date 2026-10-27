@@ -4,472 +4,889 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily English - Premium Single Quiz Studio</title>
-    <!-- Google Fonts -->
+    <title>Daily English — Premium Quiz Studio</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Noto+Sans+Devanagari:wght@600;700;800&display=swap"
         rel="stylesheet">
-    <!-- html2canvas for 4K Download -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+            font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif
         }
 
         body {
-            background: #121212;
             min-height: 100vh;
+            background: #121212;
+            color: #fff;
+            padding: 16px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 15px;
+            justify-content: center
         }
 
-        .main-wrapper {
+        .app {
             width: 100%;
-            max-width: 420px;
+            max-width: 1080px;
+            display: grid;
+            grid-template-columns: minmax(280px, 360px) minmax(280px, 1fr);
+            gap: 18px;
+            align-items: start
+        }
+
+        .left {
             display: flex;
             flex-direction: column;
             gap: 12px;
+            min-width: 0
         }
 
-        /* Top Navigation Bar with Back Button */
-        .top-nav-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .topbar,
+        .panel {
             background: #1e1e1e;
-            padding: 10px 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: 0 4px 15px #0004
         }
 
-        .back-btn {
-            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px
+        }
+
+        .back {
             color: #fff;
             text-decoration: none;
-            padding: 8px 16px;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            padding: 9px 12px;
             border-radius: 8px;
-            font-size: 13px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 3px 10px rgba(255, 65, 108, 0.4);
-            transition: 0.2s;
+            font-size: 12px;
+            font-weight: 800;
+            white-space: nowrap
         }
 
-        .back-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-
-        .nav-title {
+        .navtitle {
+            font-size: 12px;
             color: #ffc837;
-            font-size: 13px;
-            font-weight: 700;
+            font-weight: 800;
+            text-align: right
         }
 
-        /* Control Panel for Customization */
-        .control-box {
-            background: #1e1e1e;
-            padding: 12px;
-            border-radius: 12px;
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        .panel {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 9px
         }
 
-        .control-box label {
-            font-size: 11px;
-            color: #ffc837;
-            font-weight: 700;
-        }
-
-        .control-box select {
-            width: 100%;
-            background: #2b2b2b;
-            color: #fff;
-            border: 1px solid #444;
-            border-radius: 8px;
-            padding: 8px;
-            font-size: 12px;
-            outline: none;
-            cursor: pointer;
-        }
-
-        .control-box textarea {
-            width: 100%;
-            height: 90px;
-            background: #2b2b2b;
-            color: #fff;
-            border: 1px solid #444;
-            border-radius: 8px;
-            padding: 8px;
-            font-size: 12px;
-            resize: none;
-            outline: none;
-        }
-
-        .download-btn {
-            width: 100%;
-            background: #00b050;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: 800;
+        .panel h2 {
             font-size: 14px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 176, 80, 0.3);
+            color: #ffc837;
+            margin-bottom: 2px
         }
 
-        .download-btn:hover {
-            opacity: 0.95;
+        .panel label {
+            font-size: 11px;
+            color: #ddd;
+            font-weight: 700
         }
 
-        /* 9:16 Shorts / Reels Ratio Poster (Premium Dynamic Background) */
-        .poster-container {
+        .panel input,
+        .panel select,
+        .panel textarea {
             width: 100%;
-            aspect-ratio: 9 / 16;
-            background: linear-gradient(180deg, #4a00e0 0%, #8e2de2 40%, #ff416c 100%);
-            /* Default Theme 1 */
-            border-radius: 28px;
-            padding: 24px 18px;
+            background: #2b2b2b;
+            color: #fff;
+            border: 1px solid #484848;
+            border-radius: 8px;
+            padding: 9px;
+            font-size: 12px;
+            outline: none
+        }
+
+        .panel textarea {
+            height: 112px;
+            resize: vertical;
+            line-height: 1.6
+        }
+
+        .twocol {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 9px;
+            padding: 11px 12px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            color: white
+        }
+
+        .download {
+            background: #00a94f
+        }
+
+        .secondary {
+            background: #343434;
+            border: 1px solid #505050
+        }
+
+        .hint {
+            font-size: 10px;
+            color: #aaa;
+            line-height: 1.5
+        }
+
+        .preview-wrap {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center
+        }
+
+        .preview-head {
+            width: 100%;
+            max-width: 460px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            color: #ddd;
+            font-size: 12px
+        }
+
+        .preview-head strong {
+            color: #ffc837
+        }
+
+        .preview-shell {
+            width: 100%;
+            max-width: 460px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start
+        }
+
+        .poster {
+            --poster-bg: linear-gradient(180deg, #4a00e0 0%, #8e2de2 40%, #ff416c 100%);
+            width: 100%;
+            aspect-ratio: 9/16;
+            background: var(--poster-bg);
+            border-radius: 24px;
+            padding: 5.7% 4.3%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            gap: 2%;
             position: relative;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             overflow: hidden;
-            transition: background 0.3s ease;
+            box-shadow: 0 18px 40px #0008;
+            isolation: isolate;
+            container-type: inline-size;
+            touch-action: pan-y
         }
 
-        /* Top Header */
+        .poster:before,
+        .poster:after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background: #ffffff12;
+            z-index: -1;
+            pointer-events: none
+        }
+
+        .poster:before {
+            width: 65%;
+            aspect-ratio: 1;
+            top: -12%;
+            right: -22%
+        }
+
+        .poster:after {
+            width: 55%;
+            aspect-ratio: 1;
+            bottom: -10%;
+            left: -20%
+        }
+
+        .drag-item {
+            position: relative;
+            z-index: 1;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+            flex-shrink: 0
+        }
+
+        .drag-item:active {
+            cursor: grabbing
+        }
+
+        .drag-item.dragging {
+            outline: 1px dashed #ffe600;
+            outline-offset: 4px
+        }
+
         .header-section {
             text-align: center;
+            width: 100%
         }
 
         .top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            gap: 6px;
+            margin-bottom: 3cqw
         }
 
         .logo-badge {
             background: #09101f;
             color: #fff;
-            padding: 6px 14px;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 15px;
-            letter-spacing: 0.5px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5cqw 3cqw;
+            border-radius: 2.4cqw;
+            font-size: 3.6cqw;
+            font-weight: 900;
+            letter-spacing: .1px;
+            white-space: nowrap
         }
 
         .logo-badge span {
-            color: #ffc837;
+            color: #ffc837
         }
 
         .tagline-badge {
             color: #fff;
-            font-size: 10px;
+            font-size: 2.4cqw;
             font-weight: 700;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 4px 10px;
+            background: #ffffff26;
+            padding: 1cqw 2.3cqw;
             border-radius: 20px;
+            white-space: nowrap
         }
 
         .challenge-badge {
             background: #ffe600;
             color: #111;
-            font-size: 22px;
+            font-size: 5.2cqw;
+            line-height: 1.15;
             font-weight: 900;
             display: inline-block;
-            padding: 3px 25px;
+            padding: 1.2cqw 5cqw;
             border-radius: 50px;
             transform: rotate(-2deg);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            margin-top: 5px;
+            box-shadow: 0 4px 12px #0004;
+            max-width: 100%;
+            overflow-wrap: anywhere
         }
 
         .main-heading {
-            color: #ffffff;
-            font-size: 26px;
+            color: #fff;
+            font-size: 6.2cqw;
+            line-height: 1.14;
             font-weight: 900;
-            margin-top: 6px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-            letter-spacing: -0.5px;
+            margin-top: 2.3cqw;
+            text-shadow: 0 2px 5px #0006;
+            letter-spacing: -.2px;
+            overflow-wrap: anywhere
         }
 
         .hook-msg {
             background: #ff0055;
             color: #fff;
             font-weight: 800;
-            font-size: 14px;
-            padding: 7px 18px;
+            font-size: 3.35cqw;
+            line-height: 1.3;
+            padding: 1.7cqw 3.8cqw;
             border-radius: 50px;
-            margin-top: 10px;
+            margin-top: 2.5cqw;
             display: inline-block;
-            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
+            box-shadow: 0 4px 12px #ff005544;
+            max-width: 100%;
+            overflow-wrap: anywhere
         }
 
-        /* Center Big Question Card with Glassmorphism & Glowing Option Boxes */
         .big-question-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 22px;
-            padding: 22px 18px;
+            width: 100%;
+            background: #fffffff2;
+            backdrop-filter: blur(8px);
+            border-radius: 5cqw;
+            padding: 5cqw 4.2cqw;
             display: flex;
             flex-direction: column;
-            gap: 16px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            gap: 4cqw;
+            box-shadow: 0 12px 30px #0003;
+            border: 1px solid #ffffffaa;
+            color: #0d1b2a
         }
 
         .q-title-row {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 3cqw;
+            min-width: 0
         }
 
         .q-number {
-            width: 38px;
-            height: 38px;
+            width: 9cqw;
+            min-width: 9cqw;
+            aspect-ratio: 1;
             border-radius: 50%;
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 16px;
+            font-size: 4cqw;
             font-weight: 900;
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(106, 17, 203, 0.4);
+            box-shadow: 0 4px 10px #6a11cb55
         }
 
         .q-text {
-            font-size: 18px;
-            font-weight: 800;
+            font-size: 4.5cqw;
+            font-weight: 900;
             color: #0d1b2a;
-            line-height: 1.3;
+            line-height: 1.25;
+            overflow-wrap: anywhere;
+            min-width: 0
         }
 
-        /* Premium Option Boxes with Glow */
         .options-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 2.2cqw
         }
 
         .option-item {
-            background: #ffffff;
-            border: 2px solid #e1e8ed;
-            padding: 12px 16px;
-            border-radius: 14px;
-            font-size: 15px;
+            background: #fff;
+            border: 1.5px solid #e1e8ed;
+            padding: 2.6cqw 3.2cqw;
+            border-radius: 3.2cqw;
+            font-size: 3.8cqw;
             font-weight: 800;
             color: #1a1a1a;
             display: flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: all 0.2s ease;
+            gap: 3cqw;
+            min-width: 0;
+            overflow-wrap: anywhere;
+            line-height: 1.25
         }
 
-        .option-item:hover {
-            border-color: #6a11cb;
-            box-shadow: 0 6px 16px rgba(106, 17, 203, 0.15);
-        }
-
-        .option-item .opt-tag {
-            width: 28px;
-            height: 28px;
+        .opt-tag {
+            width: 7cqw;
+            min-width: 7cqw;
+            aspect-ratio: 1;
             background: linear-gradient(135deg, #0d1b2a, #1b263b);
             color: #fff;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 12px;
-            font-weight: 900;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            font-size: 3cqw;
+            font-weight: 900
         }
 
-        /* Footer Section */
+        .option-item span:last-child {
+            min-width: 0;
+            overflow-wrap: anywhere
+        }
+
         .footer-section {
+            width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 2cqw
         }
 
         .follow-card-box {
             background: #09101f;
             border-radius: 40px;
             text-align: center;
-            padding: 10px;
+            padding: 2.8cqw;
             color: #fff;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 5px 12px #0003;
+            border: 1px solid #ffffff26
         }
 
-        .follow-card-box .main-text {
-            font-size: 16px;
+        .main-text {
+            font-size: 4cqw;
             font-weight: 900;
-            letter-spacing: 1px;
+            letter-spacing: .3px;
             display: block;
-            line-height: 1.1;
+            line-height: 1.1
         }
 
-        .follow-card-box .sub-text {
+        .sub-text {
             color: #ffc837;
             font-weight: 800;
-            font-size: 10px;
-            letter-spacing: 0.5px;
+            font-size: 2.6cqw;
+            letter-spacing: .3px
         }
 
         .instagram-id-text {
             text-align: center;
             color: #fff;
-            font-size: 12px;
+            font-size: 3cqw;
             font-weight: 700;
-            letter-spacing: 0.5px;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            letter-spacing: .3px;
+            text-shadow: 0 1px 3px #0008;
+            overflow-wrap: anywhere
+        }
+
+        .is-landscape .poster {
+            padding: 3% 4%;
+            gap: 1%;
+            border-radius: 16px
+        }
+
+        .is-landscape .top-row {
+            margin-bottom: 1cqw
+        }
+
+        .is-landscape .challenge-badge {
+            font-size: 3.4cqw;
+            padding: .6cqw 3cqw
+        }
+
+        .is-landscape .main-heading {
+            font-size: 4cqw;
+            margin-top: 1cqw
+        }
+
+        .is-landscape .hook-msg {
+            font-size: 2.2cqw;
+            margin-top: 1cqw;
+            padding: .8cqw 2cqw
+        }
+
+        .is-landscape .logo-badge {
+            font-size: 2.2cqw;
+            padding: .7cqw 1.5cqw
+        }
+
+        .is-landscape .tagline-badge {
+            font-size: 1.6cqw;
+            padding: .5cqw 1.2cqw
+        }
+
+        .is-landscape .big-question-card {
+            padding: 2cqw 3cqw;
+            gap: 1.5cqw;
+            border-radius: 2.5cqw
+        }
+
+        .is-landscape .q-title-row {
+            gap: 1.5cqw
+        }
+
+        .is-landscape .q-number {
+            width: 5cqw;
+            min-width: 5cqw;
+            font-size: 2.5cqw
+        }
+
+        .is-landscape .q-text {
+            font-size: 2.7cqw
+        }
+
+        .is-landscape .options-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1cqw
+        }
+
+        .is-landscape .option-item {
+            font-size: 2.2cqw;
+            padding: 1cqw 1.5cqw;
+            gap: 1.5cqw;
+            border-radius: 1.5cqw
+        }
+
+        .is-landscape .opt-tag {
+            width: 4cqw;
+            min-width: 4cqw;
+            font-size: 1.8cqw
+        }
+
+        .is-landscape .footer-section {
+            gap: .8cqw
+        }
+
+        .is-landscape .follow-card-box {
+            padding: 1cqw
+        }
+
+        .is-landscape .main-text {
+            font-size: 2.5cqw
+        }
+
+        .is-landscape .sub-text {
+            font-size: 1.6cqw
+        }
+
+        .is-landscape .instagram-id-text {
+            font-size: 1.8cqw
+        }
+
+        @media(max-width:760px) {
+            body {
+                padding: 10px
+            }
+
+            .app {
+                grid-template-columns: 1fr;
+                max-width: 520px
+            }
+
+            .preview-wrap {
+                grid-row: 1
+            }
+
+            .preview-shell {
+                max-width: min(100%, 390px)
+            }
+
+            .preview-head {
+                max-width: min(100%, 390px)
+            }
+
+            .poster {
+                border-radius: 20px
+            }
+
+            .left {
+                width: 100%
+            }
+
+            .topbar {
+                padding: 11px
+            }
+
+            .panel {
+                padding: 12px
+            }
+        }
+
+        @media(max-width:360px) {
+            .navtitle {
+                font-size: 10px
+            }
+
+            .back {
+                font-size: 11px;
+                padding: 8px
+            }
+
+            .panel h2 {
+                font-size: 13px
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="app">
+        <aside class="left">
+            <div class="topbar"><a class="back" href="../index.html">⬅ Back to Home</a><span class="navtitle">Premium
+                    Quiz Studio</span></div>
 
-    <div class="main-wrapper">
-        <!-- Top Navigation with Root Back Button -->
-        <div class="top-nav-bar">
-            <a href="../index.html" class="back-btn">⬅️ Back to Home</a>
-            <span class="nav-title">Top 10 Premium Studio</span>
-        </div>
+            <section class="panel">
+                <h2>🎨 Image Size & Theme</h2>
+                <label for="sizeSelect">Download size</label>
+                <select id="sizeSelect">
+                    <option value="1080,1920">Instagram Reels / YouTube Shorts — 1080 × 1920</option>
+                    <option value="1080,1350">Instagram Portrait Post — 1080 × 1350</option>
+                    <option value="1080,1080">Instagram / Facebook Square — 1080 × 1080</option>
+                    <option value="1200,1500">Portrait Social Post — 1200 × 1500</option>
+                    <option value="1200,630">Facebook Landscape — 1200 × 630</option>
+                    <option value="1920,1080">Landscape / YouTube — 1920 × 1080</option>
+                    <option value="custom">Custom width × height</option>
+                </select>
+                <div class="twocol">
+                    <div><label for="customW">Custom width (px)</label><input id="customW" type="number" min="320"
+                            max="5000" value="1080"></div>
+                    <div><label for="customH">Custom height (px)</label><input id="customH" type="number" min="320"
+                            max="5000" value="1920"></div>
+                </div>
+                <label for="gradientSelect">Background theme</label>
+                <select id="gradientSelect">
+                    <option value="linear-gradient(180deg,#4a00e0 0%,#8e2de2 40%,#ff416c 100%)">1. Royal Purple & Pink
+                    </option>
+                    <option value="linear-gradient(135deg,#0f2027,#203a43,#2c5364)">2. Deep Ocean Dark</option>
+                    <option value="linear-gradient(135deg,#ff416c,#ff4b2b)">3. Sunset Neon Fire</option>
+                    <option value="linear-gradient(135deg,#11998e,#38ef7d)">4. Fresh Mint Emerald</option>
+                    <option value="linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)">5. Instagram Vibrant Glow</option>
+                    <option value="linear-gradient(135deg,#2b5876,#4e4376)">6. Royal Blue Indigo</option>
+                    <option value="linear-gradient(135deg,#f12711,#f5af19)">7. Golden Sunset Alert</option>
+                    <option value="linear-gradient(135deg,#373b44,#4286f4)">8. Cyberpunk Slate Blue</option>
+                    <option value="linear-gradient(135deg,#614385,#516395)">9. Velvet Night Gradient</option>
+                    <option value="linear-gradient(135deg,#ff0844,#ffb199)">10. Peach Rose Glamour</option>
+                </select>
+            </section>
 
-        <!-- Control Panel -->
-        <div class="control-box">
-            <label>🎨 Select Top 10 Background Theme:</label>
-            <select id="gradientSelect">
-                <option value="linear-gradient(180deg, #4a00e0 0%, #8e2de2 40%, #ff416c 100%)">1. Royal Purple & Pink
-                    (Default)</option>
-                <option value="linear-gradient(135deg, #0f2027, #203a43, #2c5364)">2. Deep Ocean Dark</option>
-                <option value="linear-gradient(135deg, #ff416c, #ff4b2b)">3. Sunset Neon Fire</option>
-                <option value="linear-gradient(135deg, #11998e, #38ef7d)">4. Fresh Mint Emerald</option>
-                <option value="linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)">5. Instagram Vibrant Glow</option>
-                <option value="linear-gradient(135deg, #2b5876, #4e4376)">6. Royal Blue Indigo</option>
-                <option value="linear-gradient(135deg, #f12711, #f5af19)">7. Golden Sunset Alert</option>
-                <option value="linear-gradient(135deg, #373b44, #4286f4)">8. Cyberpunk Slate Blue</option>
-                <option value="linear-gradient(135deg, #614385, #516395)">9. Velvet Night Gradient</option>
-                <option value="linear-gradient(135deg, #ff0844, #ffb199)">10. Peach Rose Glamour</option>
-            </select>
-
-            <label>✏️ Edit Question & Options:</label>
-            <textarea id="dataInput">Question: He is good ___ English.
+            <section class="panel">
+                <h2>✏️ Edit Quiz Content</h2>
+                <label for="challengeInput">Challenge badge</label><input id="challengeInput" value="ENGLISH CHALLENGE">
+                <label for="headingInput">Main heading</label><input id="headingInput" value="Can You Solve This?">
+                <label for="hookInput">Hook message</label><input id="hookInput"
+                    value="🔥 90% Log Galat Jawab Dete Hain!">
+                <label for="dataInput">Question and options (one per line)</label>
+                <textarea id="dataInput">Question: He is good ___ English.
 A: At
 B: In
 C: On
 D: For</textarea>
-            <button class="download-btn" id="downloadBtn">📥 Download 4K Quiz Image</button>
-        </div>
+                <label for="taglineInput">Top-right tagline</label><input id="taglineInput" value="✨ Better English">
+                <label for="followInput">Footer follow text</label><input id="followInput" value="👤 FOLLOW">
+                <label for="subInput">Footer subtext</label><input id="subInput" value="FOR DAILY ENGLISH">
+                <label for="handleInput">Social handle</label><input id="handleInput" value="📷 @forxlearner">
+                <button class="btn download" id="downloadBtn">⬇ Download PNG in Selected Size</button>
+                <div class="twocol"><button class="btn secondary" id="resetBtn">↺ Reset Positions</button><button
+                        class="btn secondary" id="fitBtn">⤢ Fit Layout</button></div>
+                <p class="hint">Preview mein header, question card ya footer ko mouse/touch se drag karo. Text edit
+                    karne ke liye fields use karo. Drag ki hui position image mein bhi export hogi.</p>
+            </section>
+        </aside>
 
-        <!-- Poster Canvas -->
-        <div class="poster-container" id="posterArea">
-            <!-- Header -->
-            <div class="header-section">
-                <div class="top-row">
-                    <div class="logo-badge">for<span>X</span> Learner</div>
-                    <div class="tagline-badge">✨ Better English</div>
-                </div>
-                <div class="challenge-badge">ENGLISH CHALLENGE</div>
-                <div class="main-heading">Can You Solve This?</div>
-                <div class="hook-msg">🔥 90% Log Galat Jawab Dete Hain!</div>
-            </div>
+        <main class="preview-wrap">
+            <div class="preview-head"><strong>LIVE PREVIEW</strong><span id="sizeLabel">1080 × 1920 px</span></div>
+            <div class="preview-shell" id="previewShell">
+                <div class="poster" id="posterArea">
+                    <div class="header-section drag-item" data-drag="header">
+                        <div class="top-row">
+                            <div class="logo-badge">for<span>X</span> Learner</div>
+                            <div class="tagline-badge" id="taglineText">✨ Better English</div>
+                        </div>
+                        <div class="challenge-badge" id="challengeText">ENGLISH CHALLENGE</div>
+                        <div class="main-heading" id="headingText">Can You Solve This?</div>
+                        <div class="hook-msg" id="hookText">🔥 90% Log Galat Jawab Dete Hain!</div>
+                    </div>
 
-            <!-- Big Question Card -->
-            <div class="big-question-card">
-                <div class="q-title-row">
-                    <div class="q-number">Q</div>
-                    <div class="q-text" id="qText">He is good ___ English.</div>
-                </div>
-                <div class="options-list">
-                    <div class="option-item">
-                        <div class="opt-tag">A</div><span id="optA">At</span>
+                    <div class="big-question-card drag-item" data-drag="question">
+                        <div class="q-title-row">
+                            <div class="q-number">Q</div>
+                            <div class="q-text" id="qText">He is good ___ English.</div>
+                        </div>
+                        <div class="options-list">
+                            <div class="option-item">
+                                <div class="opt-tag">A</div><span id="optA">At</span>
+                            </div>
+                            <div class="option-item">
+                                <div class="opt-tag">B</div><span id="optB">In</span>
+                            </div>
+                            <div class="option-item">
+                                <div class="opt-tag">C</div><span id="optC">On</span>
+                            </div>
+                            <div class="option-item">
+                                <div class="opt-tag">D</div><span id="optD">For</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="option-item">
-                        <div class="opt-tag">B</div><span id="optB">In</span>
-                    </div>
-                    <div class="option-item">
-                        <div class="opt-tag">C</div><span id="optC">On</span>
-                    </div>
-                    <div class="option-item">
-                        <div class="opt-tag">D</div><span id="optD">For</span>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Footer -->
-            <div class="footer-section">
-                <div class="follow-card-box">
-                    <span class="main-text">👤 FOLLOW</span>
-                    <span class="sub-text">FOR DAILY ENGLISH</span>
+                    <div class="footer-section drag-item" data-drag="footer">
+                        <div class="follow-card-box"><span class="main-text" id="followText">👤 FOLLOW</span><span
+                                class="sub-text" id="subText">FOR DAILY ENGLISH</span></div>
+                        <div class="instagram-id-text" id="handleText">📷 @forxlearner</div>
+                    </div>
                 </div>
-                <div class="instagram-id-text">📷 @forxlearner</div>
             </div>
-        </div>
+            <p class="drag-help">🖱️ Header, question card ya footer ko drag karke set karo. Mobile touch bhi supported
+                hai.</p>
+            <p class="status" id="statusText">PNG export ready · Answer reveal nahi hota</p>
+        </main>
     </div>
 
     <script>
-        // Background Theme Switcher
-        const gradientSelect = document.getElementById('gradientSelect');
-        const posterArea = document.getElementById('posterArea');
+        const $ = id => document.getElementById(id);
+        const poster = $('posterArea');
+        const sizeSelect = $('sizeSelect');
+        const customW = $('customW'), customH = $('customH');
+        const positions = {
+            header: { x: 0, y: 0 },
+            question: { x: 0, y: 0 },
+            footer: { x: 0, y: 0 }
+        };
 
-        gradientSelect.addEventListener('change', (e) => {
-            posterArea.style.background = e.target.value;
+        function getSize() {
+            let w, h;
+            if (sizeSelect.value === 'custom') {
+                w = Number(customW.value) || 1080;
+                h = Number(customH.value) || 1920;
+            } else {
+                [w, h] = sizeSelect.value.split(',').map(Number);
+            }
+            return {
+                w: Math.max(320, Math.min(5000, Math.round(w))),
+                h: Math.max(320, Math.min(5000, Math.round(h)))
+            };
+        }
+
+        function applySize() {
+            const { w, h } = getSize();
+            poster.style.aspectRatio = `${w}/${h}`;
+            const ratio = w / h;
+            poster.classList.toggle('is-landscape', ratio >= 1.45);
+            $('sizeLabel').textContent = `${w} × ${h} px · ${ratio.toFixed(2)}:1`;
+        }
+
+        sizeSelect.addEventListener('change', () => {
+            const custom = sizeSelect.value === 'custom';
+            customW.disabled = customH.disabled = !custom;
+            if (custom) { customW.value = 1080; customH.value = 1920; }
+            applySize();
+        });
+        customW.addEventListener('input', applySize);
+        customH.addEventListener('input', applySize);
+
+        $('gradientSelect').addEventListener('change', e => {
+            poster.style.setProperty('--poster-bg', e.target.value);
         });
 
-        // Dynamic Text Updater
-        const inputArea = document.getElementById('dataInput');
+        function updateContent() {
+            $('challengeText').textContent = $('challengeInput').value || 'ENGLISH CHALLENGE';
+            $('headingText').textContent = $('headingInput').value || 'Can You Solve This?';
+            $('hookText').textContent = $('hookInput').value || '🔥 Your Daily Challenge';
+            $('taglineText').textContent = $('taglineInput').value;
+            $('followText').textContent = $('followInput').value;
+            $('subText').textContent = $('subInput').value;
+            $('handleText').textContent = $('handleInput').value;
 
-        inputArea.addEventListener('input', () => {
-            const lines = inputArea.value.split('\n');
-            lines.forEach(l => {
-                const t = l.trim();
-                if (t.toLowerCase().startsWith('question:')) {
-                    document.getElementById('qText').innerText = t.substring(9).trim();
-                } else if (t.toUpperCase().startsWith('A:')) {
-                    document.getElementById('optA').innerText = t.substring(2).trim();
-                } else if (t.toUpperCase().startsWith('B:')) {
-                    document.getElementById('optB').innerText = t.substring(2).trim();
-                } else if (t.toUpperCase().startsWith('C:')) {
-                    document.getElementById('optC').innerText = t.substring(2).trim();
-                } else if (t.toUpperCase().startsWith('D:')) {
-                    document.getElementById('optD').innerText = t.substring(2).trim();
+            const map = { A: 'optA', B: 'optB', C: 'optC', D: 'optD' };
+            let question = '';
+            $('dataInput').value.split(/\r?\n/).forEach(line => {
+                const t = line.trim();
+                if (/^question\s*:/i.test(t)) {
+                    question = t.replace(/^question\s*:/i, '').trim();
+                } else {
+                    const m = t.match(/^([ABCD])\s*:\s*(.*)$/i);
+                    if (m) $(map[m[1].toUpperCase()]).textContent = m[2];
                 }
             });
+            if (question) $('qText').textContent = question;
+        }
+
+        ['challengeInput', 'headingInput', 'hookInput', 'taglineInput', 'followInput', 'subInput', 'handleInput', 'dataInput'].forEach(id => {
+            $(id).addEventListener('input', updateContent);
         });
 
-        // 4K Download Handler
-        document.getElementById('downloadBtn').addEventListener('click', () => {
-            html2canvas(posterArea, {
-                scale: 4,
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: null
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'Single-English-Quiz-Premium.png';
-                link.href = canvas.toDataURL('image/png', 1.0);
-                link.click();
+        function applyPositions() {
+            document.querySelectorAll('[data-drag]').forEach(el => {
+                const p = positions[el.dataset.drag];
+                el.style.transform = `translate(${p.x}px,${p.y}px)`;
             });
+        }
+
+        let active = null;
+        document.querySelectorAll('[data-drag]').forEach(el => {
+            el.addEventListener('pointerdown', e => {
+                if (e.button !== undefined && e.button !== 0) return;
+                const key = el.dataset.drag;
+                active = {
+                    el, key, startX: e.clientX, startY: e.clientY,
+                    baseX: positions[key].x, baseY: positions[key].y
+                };
+                el.classList.add('dragging');
+                el.setPointerCapture?.(e.pointerId);
+                e.preventDefault();
+            });
+            el.addEventListener('pointermove', e => {
+                if (!active || active.el !== el) return;
+                const rect = poster.getBoundingClientRect();
+                let x = active.baseX + (e.clientX - active.startX);
+                let y = active.baseY + (e.clientY - active.startY);
+                const maxX = rect.width * .42, maxY = rect.height * .42;
+                positions[active.key] = {
+                    x: Math.max(-maxX, Math.min(maxX, x)),
+                    y: Math.max(-maxY, Math.min(maxY, y))
+                };
+                applyPositions();
+            });
+            const stop = () => {
+                if (active && active.el === el) {
+                    el.classList.remove('dragging');
+                    active = null;
+                }
+            };
+            el.addEventListener('pointerup', stop);
+            el.addEventListener('pointercancel', stop);
         });
+
+        $('resetBtn').addEventListener('click', () => {
+            Object.keys(positions).forEach(k => positions[k] = { x: 0, y: 0 });
+            applyPositions();
+        });
+
+        $('fitBtn').addEventListener('click', () => {
+            Object.keys(positions).forEach(k => positions[k] = { x: 0, y: 0 });
+            applyPositions();
+            poster.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        $('downloadBtn').addEventListener('click', async () => {
+            if (!window.html2canvas) {
+                alert('Image export library load nahi hui. Internet connection check karke page refresh karein.');
+                return;
+            }
+            const { w, h } = getSize();
+            const btn = $('downloadBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Image ban rahi hai…';
+            $('statusText').textContent = 'High-quality PNG render ho raha hai…';
+
+            try {
+                await document.fonts.ready;
+                const source = await html2canvas(poster, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: false,
+                    backgroundColor: null,
+                    logging: false
+                });
+
+                const output = document.createElement('canvas');
+                output.width = w;
+                output.height = h;
+                const ctx = output.getContext('2d', { alpha: false });
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                ctx.drawImage(source, 0, 0, w, h);
+
+                const blob = await new Promise(resolve => output.toBlob(resolve, 'image/png'));
+                if (!blob) throw new Error('PNG create nahi ho paya');
+
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `Daily-English-Quiz-${w}x${h}.png`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                setTimeout(() => URL.revokeObjectURL(url), 1500);
+
+                $('statusText').textContent = `Downloaded · ${w} × ${h} px · PNG`;
+            } catch (err) {
+                console.error(err);
+                $('statusText').textContent = 'Download failed. Internet connection check karke dobara try karein.';
+                alert('Image download nahi ho paya. Internet connection check karein aur dobara try karein.');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '⬇ Download PNG in Selected Size';
+            }
+        });
+
+        customW.disabled = customH.disabled = true;
+        applySize();
+        updateContent();
+        applyPositions();
     </script>
 </body>
 

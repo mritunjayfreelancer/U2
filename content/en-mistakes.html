@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top 5 Common English Mistakes - forX learner</title>
+    <title>Top 5 Common English Mistakes - forX learner Studio</title>
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Noto+Sans+Devanagari:wght@600;700;800;900&display=swap"
         rel="stylesheet">
-    <!-- html2canvas for 4K Download -->
+    <!-- html2canvas for High-Res 4K Download -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         * {
@@ -25,15 +25,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 12px;
+            padding: 16px;
         }
 
         .main-wrapper {
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         /* Top Navigation Bar */
@@ -42,7 +42,7 @@
             justify-content: space-between;
             align-items: center;
             background: #1e1e1e;
-            padding: 10px 15px;
+            padding: 12px 16px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
@@ -73,34 +73,49 @@
             font-weight: 700;
         }
 
+        /* Control Box */
         .control-box {
             background: #1e1e1e;
-            padding: 12px;
+            padding: 14px;
             border-radius: 12px;
             color: #fff;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .control-box label {
             display: block;
             font-size: 11px;
             color: #ffc837;
-            margin-bottom: 4px;
             font-weight: 700;
         }
 
-        .control-box textarea {
+        .control-box select {
             width: 100%;
-            height: 110px;
             background: #2b2b2b;
             color: #fff;
             border: 1px solid #444;
             border-radius: 8px;
-            padding: 8px;
+            padding: 9px;
+            font-size: 12px;
+            outline: none;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .control-box textarea {
+            width: 100%;
+            height: 95px;
+            background: #2b2b2b;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 9px;
             font-size: 11px;
             resize: none;
             outline: none;
-            margin-bottom: 8px;
             line-height: 1.3;
         }
 
@@ -109,52 +124,74 @@
             background: #00b050;
             color: #fff;
             border: none;
-            padding: 10px;
+            padding: 11px;
             border-radius: 8px;
             font-weight: 800;
             font-size: 14px;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0, 176, 80, 0.3);
+            transition: 0.2s;
         }
 
         .download-btn:hover {
             opacity: 0.95;
+            transform: translateY(-1px);
         }
 
-        /* 9:16 Shorts / Reels Ratio Poster - Fully Filled, Large Fonts */
-        .poster-container {
+        /* ========================================================
+           ROBUST SCALING & ZERO OVERLAP POSTER ENGINE
+           ======================================================== */
+        .poster-outer-box {
             width: 100%;
-            aspect-ratio: 9 / 16;
-            background: linear-gradient(180deg, #4a00e0 0%, #8e2de2 40%, #ff416c 100%);
-            border-radius: 28px;
-            padding: 16px 14px;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
+            justify-content: center;
+            align-items: center;
+            background: #181818;
+            border-radius: 28px;
+            padding: 12px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             overflow: hidden;
         }
 
-        /* Top Header Styling (Bigger Fonts) */
+        .poster-container {
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            /* Default */
+            background: linear-gradient(180deg, #4a00e0 0%, #8e2de2 40%, #ff416c 100%);
+            border-radius: 20px;
+            padding: clamp(10px, 3.5%, 16px) clamp(10px, 3.5%, 14px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: aspect-ratio 0.3s ease;
+        }
+
+        /* Header Section */
         .header-section {
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(2px, 0.8vh, 5px);
+            flex-shrink: 0;
         }
 
         .top-row {
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px;
         }
 
         .logo-badge {
             background: #0d1b2a;
             color: #fff;
-            padding: 6px 14px;
-            border-radius: 12px;
+            padding: clamp(3px, 0.6vh, 6px) clamp(8px, 2vw, 14px);
+            border-radius: 10px;
             font-weight: 900;
-            font-size: 15px;
+            font-size: clamp(10px, 2.2vh, 14px);
             letter-spacing: 0.5px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
         }
@@ -165,20 +202,20 @@
 
         .tagline-badge {
             color: #fff;
-            font-size: 10px;
+            font-size: clamp(9px, 1.8vh, 11px);
             font-weight: 800;
             background: rgba(0, 0, 0, 0.3);
-            padding: 4px 10px;
+            padding: clamp(2px, 0.5vh, 4px) clamp(6px, 1.5vw, 10px);
             border-radius: 20px;
         }
 
         .title-top-badge {
             background: #ffe600;
             color: #111;
-            font-size: 22px;
+            font-size: clamp(14px, 3vh, 21px);
             font-weight: 900;
             display: inline-block;
-            padding: 2px 26px;
+            padding: clamp(1px, 0.3vh, 3px) clamp(14px, 3vw, 24px);
             border-radius: 50px;
             transform: rotate(-2deg);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -187,9 +224,8 @@
 
         .title-main-text {
             color: #ffffff;
-            font-size: 26px;
+            font-size: clamp(16px, 3.8vh, 25px);
             font-weight: 900;
-            margin-top: 2px;
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
             letter-spacing: -0.5px;
             line-height: 1.15;
@@ -199,33 +235,36 @@
             background: #ffffff;
             color: #0d1b2a;
             font-weight: 900;
-            font-size: 13px;
-            padding: 6px 16px;
+            font-size: clamp(10px, 2vh, 13px);
+            padding: clamp(3px, 0.6vh, 5px) clamp(10px, 2.5vw, 16px);
             border-radius: 50px;
-            margin-top: 4px;
-            display: inline-block;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
-        /* Cards Wrapper for 5 Mistakes with Shift+Click Multi-Select & Drag */
+        /* Cards Wrapper with strict flex distribution */
         .cards-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: clamp(4px, 1vh, 8px);
+            flex-grow: 1;
+            justify-content: space-evenly;
+            min-height: 0;
+            margin: clamp(4px, 1vh, 8px) 0;
         }
 
         .mistake-card-item {
             background: #ffffff;
-            border-radius: 14px;
-            padding: 9px 12px;
+            border-radius: 12px;
+            padding: clamp(5px, 1.2vh, 10px) clamp(8px, 2vw, 14px);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: clamp(6px, 1.5vw, 12px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             cursor: grab;
             user-select: none;
             transition: transform 0.15s ease, background 0.15s ease, border 0.15s ease;
             border: 2px solid transparent;
+            min-height: 0;
         }
 
         .mistake-card-item:active {
@@ -244,15 +283,15 @@
         }
 
         .card-number-badge {
-            width: 32px;
-            height: 32px;
+            width: clamp(22px, 4.5vh, 32px);
+            height: clamp(22px, 4.5vh, 32px);
             border-radius: 50%;
             background: #6a11cb;
             color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 14px;
+            font-size: clamp(10px, 2.2vh, 14px);
             font-weight: 900;
             flex-shrink: 0;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -281,58 +320,61 @@
         .content-box {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: clamp(1px, 0.2vh, 3px);
             flex-grow: 1;
             min-width: 0;
         }
 
-        /* Larger Bold Fonts for Sentences & Hindi */
         .wrong-line {
-            font-size: 13px;
+            font-size: clamp(9px, 1.9vh, 13px);
             font-weight: 800;
             color: #d90429;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            line-height: 1.2;
         }
 
         .correct-line {
-            font-size: 13px;
+            font-size: clamp(9px, 1.9vh, 13px);
             font-weight: 900;
             color: #1b4332;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            line-height: 1.2;
         }
 
         .hindi-line {
-            font-size: 12px;
+            font-size: clamp(8px, 1.7vh, 11px);
             font-weight: 800;
             color: #343a40;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            line-height: 1.2;
         }
 
         /* Footer Section */
         .footer-section {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: clamp(2px, 0.6vh, 4px);
+            flex-shrink: 0;
         }
 
         .follow-card-box {
             background: #0d1b2a;
             border-radius: 40px;
             text-align: center;
-            padding: 8px;
+            padding: clamp(4px, 1vh, 8px);
             color: #fff;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .follow-card-box .main-text {
-            font-size: 15px;
+            font-size: clamp(10px, 2.2vh, 14px);
             font-weight: 900;
             letter-spacing: 1px;
             display: block;
@@ -342,14 +384,14 @@
         .follow-card-box .sub-text {
             color: #ffc837;
             font-weight: 900;
-            font-size: 10px;
+            font-size: clamp(7px, 1.5vh, 10px);
             letter-spacing: 0.5px;
         }
 
         .instagram-id-text {
             text-align: center;
             color: #fff;
-            font-size: 12px;
+            font-size: clamp(9px, 1.8vh, 12px);
             font-weight: 800;
             letter-spacing: 0.5px;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
@@ -368,79 +410,88 @@
 
         <!-- Control Box -->
         <div class="control-box">
+            <label>📐 प्लेटफॉर्म साइज़ चुनें (Zero Clipping / Perfect Fit):</label>
+            <select id="formatSelector">
+                <option value="9/16">9:16 (YouTube Shorts / Reels / Stories)</option>
+                <option value="4/5">4:5 (Instagram Portrait Post)</option>
+                <option value="1/1">1:1 (Instagram / Facebook Square Post)</option>
+            </select>
+
             <label>💡 Shift + Click करके कई कार्ड्स एक साथ सेलेक्ट करें और ड्रैग करके रीऑर्डर करें!</label>
             <textarea id="dataInput">1. ❌ I am agree with you. | ✅ I agree with you. | (मैं तुमसे सहमत हूँ।)
 2. ❌ He don't know. | ✅ He doesn't know. | (उसे नहीं पता है।)
 3. ❌ I didn't went there. | ✅ I didn't go there. | (मैं वहाँ नहीं गया।)
 4. ❌ She is more smarter than me. | ✅ She is smarter than me. | (वो मुझसे ज़्यादा स्मार्ट है।)
 5. ❌ I have a one brother. | ✅ I have one brother. | (मेरा एक भाई है।)</textarea>
-            <button class="download-btn" id="downloadBtn">📥 Download 4K Shorts Image</button>
+            <button class="download-btn" id="downloadBtn">📥 Download High-Res Image (4K)</button>
         </div>
 
-        <!-- Poster Canvas (9:16 Shorts Ratio) -->
-        <div class="poster-container" id="posterArea">
-            <!-- Header -->
-            <div class="header-section">
-                <div class="top-row">
-                    <div class="logo-badge">for<span>X</span> learner</div>
-                    <div class="tagline-badge">✨ Daily English Tips</div>
+        <!-- Poster Canvas Wrapper -->
+        <div class="poster-outer-box">
+            <div class="poster-container" id="posterArea">
+                <!-- Header -->
+                <div class="header-section">
+                    <div class="top-row">
+                        <div class="logo-badge">for<span>X</span> learner</div>
+                        <div class="tagline-badge">✨ Daily English Tips</div>
+                    </div>
+                    <div class="title-top-badge">Top 5</div>
+                    <div class="title-main-text">Common English Mistakes</div>
+                    <div class="banner-msg-box">❌ In galtiyon ko sudharo!</div>
                 </div>
-                <div class="title-top-badge">Top 5</div>
-                <div class="title-main-text">Common English Mistakes</div>
-                <div class="banner-msg-box">❌ In galtiyon ko sudharo!</div>
-            </div>
 
-            <!-- Cards with Shift+Click Multi-Select & Drag -->
-            <div class="cards-wrapper" id="cardsList">
-                <div class="mistake-card-item" draggable="true" data-index="0">
-                    <div class="card-number-badge">1</div>
-                    <div class="content-box">
-                        <div class="wrong-line">❌ I am agree with you.</div>
-                        <div class="correct-line">✅ I agree with you.</div>
-                        <div class="hindi-line">(मैं तुमसे सहमत हूँ।)</div>
+                <!-- Cards -->
+                <div class="cards-wrapper" id="cardsList">
+                    <div class="mistake-card-item" draggable="true" data-index="0">
+                        <div class="card-number-badge">1</div>
+                        <div class="content-box">
+                            <div class="wrong-line">❌ I am agree with you.</div>
+                            <div class="correct-line">✅ I agree with you.</div>
+                            <div class="hindi-line">(मैं तुमसे सहमत हूँ।)</div>
+                        </div>
+                    </div>
+                    <div class="mistake-card-item" draggable="true" data-index="1">
+                        <div class="card-number-badge">2</div>
+                        <div class="content-box">
+                            <div class="wrong-line">❌ He don't know.</div>
+                            <div class="correct-line">✅ He doesn't know.</div>
+                            <div class="hindi-line">(उसे नहीं पता है।)</div>
+                        </div>
+                    </div>
+                    <div class="mistake-card-item" draggable="true" data-index="2">
+                        <div class="card-number-badge">3</div>
+                        <div class="content-box">
+                            <div class="wrong-line">❌ I didn't went there.</div>
+                            <div class="correct-line">✅ I didn't go there.</div>
+                            <div class="hindi-line">(मैं वहाँ नहीं गया।)</div>
+                        </div>
+                    </div>
+                    <div class="mistake-card-item" draggable="true" data-index="3">
+                        <div class="card-number-badge">4</div>
+                        <div class="content-box">
+                            <div class="wrong-line">❌ She is more smarter than me.</div>
+                            <div class="correct-line">✅ She is smarter than me.</div>
+                            <div class="hindi-line">(वो मुझसे ज़्यादा स्मार्ट है।)</div>
+                        </div>
+                    </div>
+                    <div class="mistake-card-item" draggable="true" data-index="4">
+                        <div class="card-number-badge">5</div>
+                        <div class="content-box">
+                            <div class="wrong-line">❌ I have a one brother.</div>
+                            <div class="correct-line">✅ I have one brother.</div>
+                            <div class="hindi-line">(मेरा एक भाई है।)</div>
+                        </div>
                     </div>
                 </div>
-                <div class="mistake-card-item" draggable="true" data-index="1">
-                    <div class="card-number-badge">2</div>
-                    <div class="content-box">
-                        <div class="wrong-line">❌ He don't know.</div>
-                        <div class="correct-line">✅ He doesn't know.</div>
-                        <div class="hindi-line">(उसे नहीं पता है।)</div>
-                    </div>
-                </div>
-                <div class="mistake-card-item" draggable="true" data-index="2">
-                    <div class="card-number-badge">3</div>
-                    <div class="content-box">
-                        <div class="wrong-line">❌ I didn't went there.</div>
-                        <div class="correct-line">✅ I didn't go there.</div>
-                        <div class="hindi-line">(मैं वहाँ नहीं गया।)</div>
-                    </div>
-                </div>
-                <div class="mistake-card-item" draggable="true" data-index="3">
-                    <div class="card-number-badge">4</div>
-                    <div class="content-box">
-                        <div class="wrong-line">❌ She is more smarter than me.</div>
-                        <div class="correct-line">✅ She is smarter than me.</div>
-                        <div class="hindi-line">(वो मुझसे ज़्यादा स्मार्ट है।)</div>
-                    </div>
-                </div>
-                <div class="mistake-card-item" draggable="true" data-index="4">
-                    <div class="card-number-badge">5</div>
-                    <div class="content-box">
-                        <div class="wrong-line">❌ I have a one brother.</div>
-                        <div class="correct-line">✅ I have one brother.</div>
-                        <div class="hindi-line">(मेरा एक भाई है।)</div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Footer -->
-            <div class="footer-section">
-                <div class="follow-card-box">
-                    <span class="main-text">👤 FOLLOW</span>
-                    <span class="sub-text">FOR DAILY ENGLISH</span>
+                <!-- Footer -->
+                <div class="footer-section">
+                    <div class="follow-card-box">
+                        <span class="main-text">👤 FOLLOW</span>
+                        <span class="sub-text">FOR DAILY ENGLISH</span>
+                    </div>
+                    <div class="instagram-id-text">📷 @forxlearner</div>
                 </div>
-                <div class="instagram-id-text">📷 @forxlearner</div>
             </div>
         </div>
     </div>
@@ -448,6 +499,13 @@
     <script>
         const inputArea = document.getElementById('dataInput');
         const cardsList = document.getElementById('cardsList');
+        const formatSelector = document.getElementById('formatSelector');
+        const posterArea = document.getElementById('posterArea');
+
+        // Dynamic Aspect Ratio Handler with zero overlap constraint
+        formatSelector.addEventListener('change', () => {
+            posterArea.style.aspectRatio = formatSelector.value;
+        });
 
         // Update textarea from current DOM card order
         function updateTextareaFromDOM() {
@@ -553,20 +611,19 @@
             }, { offset: Number.NEGATIVE_INFINITY }).element;
         }
 
-        // 4K Download Handler
+        // High-Quality 4K Download Handler with Zero Artifacts
         document.getElementById('downloadBtn').addEventListener('click', () => {
-            // Temporarily clear selections for clean screenshot
             cardsList.querySelectorAll('.mistake-card-item').forEach(c => c.classList.remove('selected'));
 
-            const poster = document.getElementById('posterArea');
-            html2canvas(poster, {
+            const formatName = formatSelector.value.replace('/', '-');
+            html2canvas(posterArea, {
                 scale: 4,
                 useCORS: true,
                 allowTaint: true,
                 backgroundColor: null
             }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'Top-5-Common-English-Mistakes.png';
+                link.download = `Top-5-English-Mistakes-${formatName}.png`;
                 link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
             });

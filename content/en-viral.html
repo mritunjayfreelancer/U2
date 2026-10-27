@@ -122,7 +122,7 @@
             opacity: 0.95;
         }
 
-        /* --- POSTER CONTAINER (9:16 Shorts Ratio) --- */
+        /* --- POSTER CONTAINER (Dynamic Aspect Ratio Support) --- */
         .poster-container {
             width: 100%;
             aspect-ratio: 9 / 16;
@@ -135,7 +135,7 @@
             position: relative;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             overflow: hidden;
-            transition: background 0.3s ease;
+            transition: aspect-ratio 0.3s ease, background 0.3s ease;
         }
 
         /* Top Header Styling */
@@ -401,7 +401,7 @@
                 <div style="flex:1;">
                     <label>🌄 Background Theme:</label>
                     <select id="bgThemeSelect">
-                        <option value="linear-gradient(180deg, #512da8 0%, #673ab7 35%, #e91e63 100%)">1. Royal Purple
+                        <option value="linear-gradient(180deg, #512da8 0%, #673ab7 35%, #e91e63 100%)">Royal Purple
                             (Default)</option>
                         <option value="linear-gradient(180deg, #0f2027 0%, #203a43 50%, #2c5364 100%)">2. Deep Ocean
                             Dark</option>
@@ -412,12 +412,23 @@
                 <div style="flex:1;">
                     <label>📦 Card Box Theme:</label>
                     <select id="boxThemeSelect">
-                        <option value="clean-white">1. Clean White (Default)</option>
+                        <option value="clean-white">Clean White (Default)</option>
                         <option value="glass-dark">2. Dark Glassmorphism</option>
                         <option value="neon-glow">3. Neon Gold Glow</option>
                         <option value="soft-yellow">4. Soft Cream Yellow</option>
                     </select>
                 </div>
+            </div>
+
+            <!-- NEW: Platform Size / Aspect Ratio Selector -->
+            <div>
+                <label>📱 Select Platform / Download Size Ratio:</label>
+                <select id="aspectRatioSelect">
+                    <option value="9/16">Vertical Reels / Shorts / TikTok (9:16) - Perfect</option>
+                    <option value="1/1">Instagram Post / Square (1:1) - Perfect</option>
+                    <option value="4/5">Instagram Portrait Post (4:5) - Perfect</option>
+                    <option value="16/9">YouTube / Facebook Landscape (16:9) - Perfect</option>
+                </select>
             </div>
 
             <label>📝 Content Textarea (English, Pronunciation, Hindi):</label>
@@ -430,10 +441,10 @@ Pronunciation: डोंट टेस्ट माय पेशेंस।
 Hindi: मेरे सब्र का इम्तिहान मत लो।
 
 English: Mind your own business.
-Pronunciation: माइंड योर ओन बिज़नेस।
+Pronunciation: माइंड योर ओन बिज़नेस।
 Hindi: अपने काम से काम रखो।</textarea>
 
-            <button class="download-btn" id="downloadBtn">📥 Download 4K Shorts Image</button>
+            <button class="download-btn" id="downloadBtn">📥 Download Perfect High-Res Image</button>
         </div>
 
         <!-- POSTER CANVAS -->
@@ -508,7 +519,7 @@ Hindi: अपने काम से काम रखो।</textarea>
                         <div class="single-row uchharan-row">
                             <button class="action-icon-btn">🔊</button>
                             <span class="row-badge-label">उच्चारण</span>
-                            <span class="row-text-content" id="u3">माइंड योर ओन बिज़नेस।</span>
+                            <span class="row-text-content" id="u3">माइंड योर ओन बिज़नेस।</span>
                         </div>
                         <div class="single-row hindi-row">
                             <button class="action-icon-btn">🔊</button>
@@ -534,6 +545,11 @@ Hindi: अपने काम से काम रखो।</textarea>
         // Background Theme Selector
         document.getElementById('bgThemeSelect').addEventListener('change', (e) => {
             document.getElementById('posterArea').style.background = e.target.value;
+        });
+
+        // Aspect Ratio Selector (Fixes layout for Instagram Posts, Reels, YouTube Shorts, etc.)
+        document.getElementById('aspectRatioSelect').addEventListener('change', (e) => {
+            document.getElementById('posterArea').style.aspectRatio = e.target.value;
         });
 
         // Box Theme Selector
@@ -588,7 +604,7 @@ Hindi: अपने काम से काम रखो।</textarea>
             });
         });
 
-        // 4K Download Handler
+        // High-Resolution Download Handler
         document.getElementById('downloadBtn').addEventListener('click', () => {
             const poster = document.getElementById('posterArea');
             html2canvas(poster, {

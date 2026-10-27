@@ -122,10 +122,11 @@
             opacity: 0.95;
         }
 
-        /* --- POSTER CONTAINER (9:16 Shorts Ratio) --- */
+        /* --- POSTER CONTAINER (Dynamic Aspect Ratio Support) --- */
         .poster-container {
             width: 100%;
             aspect-ratio: 9 / 16;
+            /* Default Shorts / Reels Ratio */
             background: linear-gradient(180deg, #512da8 0%, #673ab7 35%, #e91e63 100%);
             border-radius: 28px;
             padding: 20px 16px;
@@ -135,10 +136,10 @@
             position: relative;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             overflow: hidden;
-            transition: background 0.3s ease;
+            transition: aspect-ratio 0.3s ease, background 0.3s ease;
         }
 
-        /* Top Header Styling[cite: 3] */
+        /* Top Header Styling */
         .header-section {
             text-align: center;
         }
@@ -211,7 +212,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        /* Cards Wrapper[cite: 3] */
+        /* Cards Wrapper */
         .cards-wrapper {
             display: flex;
             flex-direction: column;
@@ -344,7 +345,7 @@
             color: #0d1b2a;
         }
 
-        /* Footer Section[cite: 3] */
+        /* Footer Section */
         .footer-section {
             display: flex;
             flex-direction: column;
@@ -400,10 +401,10 @@
         <div class="control-box">
             <div class="control-row">
                 <div style="flex:1;">
-                    <label>🌄 Background Theme (Top 10):</label>
+                    <label>🌄 Background Theme:</label>
                     <select id="bgThemeSelect">
-                        <option value="linear-gradient(180deg, #512da8 0%, #673ab7 35%, #e91e63 100%)">1. Royal Purple
-                            Neon (Default)</option>
+                        <option value="linear-gradient(180deg, #512da8 0%, #673ab7 35%, #e91e63 100%)">Royal Purple Neon
+                            (Default)</option>
                         <option value="linear-gradient(180deg, #0f2027 0%, #203a43 50%, #2c5364 100%)">2. Deep Ocean
                             Dark</option>
                         <option value="linear-gradient(180deg, #ff416c 0%, #ff4b2b 100%)">3. Sunset Fire Gradient
@@ -422,9 +423,9 @@
                     </select>
                 </div>
                 <div style="flex:1;">
-                    <label>📦 Card Box Theme (Top 10):</label>
+                    <label>📦 Card Box Theme:</label>
                     <select id="boxThemeSelect">
-                        <option value="clean-white">1. Clean White (Default)</option>
+                        <option value="clean-white">Clean White (Default)</option>
                         <option value="glass-dark">2. Dark Glassmorphism</option>
                         <option value="neon-glow">3. Neon Gold Glow</option>
                         <option value="soft-yellow">4. Soft Cream Yellow</option>
@@ -436,6 +437,17 @@
                         <option value="solid-black">10. Solid Matte Black</option>
                     </select>
                 </div>
+            </div>
+
+            <!-- NEW: Platform Size Selector -->
+            <div>
+                <label>📱 Select Platform / Download Size Ratio:</label>
+                <select id="aspectRatioSelect">
+                    <option value="9/16">Vertical Reels / Shorts / TikTok (9:16) - Perfect</option>
+                    <option value="1/1">Instagram Post / Square (1:1) - Perfect</option>
+                    <option value="4/5">Instagram Portrait Post (4:5) - Perfect</option>
+                    <option value="16/9">YouTube / Facebook Landscape (16:9) - Perfect</option>
+                </select>
             </div>
 
             <label>📝 Content Textarea (Paste all data here):</label>
@@ -451,10 +463,10 @@ English: See you tomorrow.
 Pronunciation: सी यू टुमॉरो।
 Hindi: कल मिलते हैं।</textarea>
 
-            <button class="download-btn" id="downloadBtn">📥 Download 4K Shorts Image</button>
+            <button class="download-btn" id="downloadBtn">📥 Download Perfect High-Res Image</button>
         </div>
 
-        <!-- POSTER CANVAS (Exact Reference Match[cite: 3]) -->
+        <!-- POSTER CANVAS -->
         <div class="poster-container" id="posterArea">
 
             <!-- Header -->
@@ -554,13 +566,17 @@ Hindi: कल मिलते हैं।</textarea>
             document.getElementById('posterArea').style.background = e.target.value;
         });
 
+        // Aspect Ratio Selector (Fixes layout for Instagram Posts, Reels, YouTube Shorts, etc.)
+        document.getElementById('aspectRatioSelect').addEventListener('change', (e) => {
+            document.getElementById('posterArea').style.aspectRatio = e.target.value;
+        });
+
         // Box / Card Theme Selector
         document.getElementById('boxThemeSelect').addEventListener('change', (e) => {
             const theme = e.target.value;
             const cards = document.querySelectorAll('.sentence-card-item');
 
             cards.forEach(card => {
-                // Reset styles
                 card.style.background = '#ffffff';
                 card.style.border = 'none';
                 card.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.2)';
@@ -625,7 +641,7 @@ Hindi: कल मिलते हैं।</textarea>
             });
         });
 
-        // 4K Download Handler
+        // High-Resolution Download Handler
         document.getElementById('downloadBtn').addEventListener('click', () => {
             const poster = document.getElementById('posterArea');
             html2canvas(poster, {
@@ -635,7 +651,7 @@ Hindi: कल मिलते हैं।</textarea>
                 backgroundColor: null
             }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'Top-3-Daily-English-4K.png';
+                link.download = 'forX-Learner-Poster-HighRes.png';
                 link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
             });

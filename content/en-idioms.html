@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top 3 English - 2 Row Clean Studio</title>
+    <title>Top 3 English - Multi-Size Studio</title>
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Noto+Sans+Devanagari:wght@600;700;800;900&display=swap"
@@ -30,7 +30,7 @@
 
         .main-wrapper {
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -72,7 +72,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .control-box label {
@@ -122,10 +122,11 @@
             opacity: 0.95;
         }
 
-        /* --- POSTER CONTAINER (9:16 Shorts Ratio) --- */
+        /* --- POSTER CONTAINER (Dynamic Ratio) --- */
         .poster-container {
             width: 100%;
             aspect-ratio: 9 / 16;
+            /* Default Shorts Ratio */
             background: linear-gradient(180deg, #512da8 0%, #673ab7 35%, #e91e63 100%);
             border-radius: 28px;
             padding: 20px 16px;
@@ -135,7 +136,7 @@
             position: relative;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             overflow: hidden;
-            transition: background 0.3s ease;
+            transition: aspect-ratio 0.3s ease, background 0.3s ease;
         }
 
         /* Top Header Styling */
@@ -211,7 +212,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        /* Cards Wrapper (2-Row Layout: Upar-Neeche) */
+        /* Cards Wrapper (2-Row Layout) */
         .cards-wrapper {
             display: flex;
             flex-direction: column;
@@ -227,7 +228,6 @@
             gap: 12px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             position: relative;
-            transition: all 0.3s ease;
         }
 
         .card-number-badge {
@@ -265,7 +265,6 @@
             min-width: 0;
         }
 
-        /* 2-Row Design Stacked (Upar-Neeche) */
         .single-row {
             display: flex;
             flex-direction: column;
@@ -357,30 +356,42 @@
         <!-- Top Nav -->
         <div class="top-nav-bar">
             <a href="../index.html" class="home-btn">🏠 Home</a>
-            <span class="nav-title">2-Row Clean Studio</span>
+            <span class="nav-title">Multi-Size Studio</span>
         </div>
 
         <!-- Control Panel -->
         <div class="control-box">
             <div class="control-row">
                 <div style="flex:1;">
-                    <label>🌄 Background Theme:</label>
-                    <select id="bgThemeSelect">
-                        <option value="linear-gradient(180deg, #512da8 0%, #673ab7 35%, #e91e63 100%)">1. Royal Purple
-                            (Default)</option>
-                        <option value="linear-gradient(180deg, #0f2027 0%, #203a43 50%, #2c5364 100%)">2. Deep Ocean
-                            Dark</option>
-                        <option value="linear-gradient(180deg, #ff416c 0%, #ff4b2b 100%)">3. Sunset Fire</option>
-                        <option value="linear-gradient(180deg, #11998e 0%, #38ef7d 100%)">4. Fresh Mint</option>
+                    <label>📐 Image Size / Format:</label>
+                    <select id="sizeSelect">
+                        <option value="9/16">Shorts / Reels (9:16)</option>
+                        <option value="4/5">Instagram Post (4:5)</option>
+                        <option value="1/1">Square Post (1:1)</option>
+                        <option value="16/9">Landscape / Banner (16:9)</option>
                     </select>
                 </div>
                 <div style="flex:1;">
+                    <label>🌄 Background Theme:</label>
+                    <select id="bgThemeSelect">
+                        <option value="linear-gradient(180deg, #512da8 0%, #673ab7 35%, #e91e63 100%)">Royal Purple
+                        </option>
+                        <option value="linear-gradient(180deg, #0f2027 0%, #203a43 50%, #2c5364 100%)">Deep Ocean
+                        </option>
+                        <option value="linear-gradient(180deg, #ff416c 0%, #ff4b2b 100%)">Sunset Fire</option>
+                        <option value="linear-gradient(180deg, #11998e 0%, #38ef7d 100%)">Fresh Mint</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-row">
+                <div style="flex:1;">
                     <label>📦 Card Box Theme:</label>
                     <select id="boxThemeSelect">
-                        <option value="clean-white">1. Clean White (Default)</option>
-                        <option value="glass-dark">2. Dark Glassmorphism</option>
-                        <option value="neon-glow">3. Neon Gold Glow</option>
-                        <option value="soft-yellow">4. Soft Cream Yellow</option>
+                        <option value="clean-white">Clean White (Default)</option>
+                        <option value="glass-dark">Dark Glassmorphism</option>
+                        <option value="neon-glow">Neon Gold Glow</option>
+                        <option value="soft-yellow">Soft Cream Yellow</option>
                     </select>
                 </div>
             </div>
@@ -395,12 +406,11 @@ Hindi: आप क्या कर रहे हैं?
 English: See you tomorrow.
 Hindi: कल मिलते हैं।</textarea>
 
-            <button class="download-btn" id="downloadBtn">📥 Download 4K Shorts Image</button>
+            <button class="download-btn" id="downloadBtn">📥 Download High-Res Image</button>
         </div>
 
         <!-- POSTER CANVAS -->
         <div class="poster-container" id="posterArea">
-
             <!-- Header -->
             <div class="header-section">
                 <div class="top-row">
@@ -472,10 +482,17 @@ Hindi: कल मिलते हैं।</textarea>
     </div>
 
     <script>
+        // Size Selector Handler
+        document.getElementById('sizeSelect').addEventListener('change', (e) => {
+            document.getElementById('posterArea').style.aspectRatio = e.target.value;
+        });
+
+        // Background Theme Handler
         document.getElementById('bgThemeSelect').addEventListener('change', (e) => {
             document.getElementById('posterArea').style.background = e.target.value;
         });
 
+        // Box Theme Handler
         document.getElementById('boxThemeSelect').addEventListener('change', (e) => {
             const theme = e.target.value;
             const cards = document.querySelectorAll('.sentence-card-item');
@@ -488,7 +505,6 @@ Hindi: कल मिलते हैं।</textarea>
                 if (theme === 'glass-dark') {
                     card.style.background = 'rgba(20, 20, 30, 0.85)';
                     card.style.border = '1px solid rgba(255,255,255,0.2)';
-                    card.style.backdropFilter = 'blur(10px)';
                 } else if (theme === 'neon-glow') {
                     card.style.background = '#111';
                     card.style.border = '2px solid #ffc837';
@@ -500,6 +516,7 @@ Hindi: कल मिलते हैं।</textarea>
             });
         });
 
+        // Textarea Live Parser
         const inputArea = document.getElementById('dataInput');
         inputArea.addEventListener('input', () => {
             const text = inputArea.value;
@@ -511,8 +528,8 @@ Hindi: कल मिलते हैं।</textarea>
                 const t = l.trim();
                 if (t.toLowerCase().includes('english:')) {
                     eng = t.split(/english:/i)[1].trim();
-                } else if (t.toLowerCase().includes('hindi:') || t.includes('हिंदी में:') || t.toLowerCase().includes('hindi में:')) {
-                    hin = t.split(/hindi:|हिंदी में:|hindi में:/i)[1].trim();
+                } else if (t.toLowerCase().includes('hindi:') || t.includes('हिंदी में:')) {
+                    hin = t.split(/hindi:|हिंदी में:/i)[1].trim();
                     if (idx <= 3) {
                         if (document.getElementById('e' + idx)) document.getElementById('e' + idx).innerText = eng;
                         if (document.getElementById('h' + idx)) document.getElementById('h' + idx).innerText = hin;
@@ -523,6 +540,7 @@ Hindi: कल मिलते हैं।</textarea>
             });
         });
 
+        // 4K High-Res Download Handler
         document.getElementById('downloadBtn').addEventListener('click', () => {
             const poster = document.getElementById('posterArea');
             html2canvas(poster, {
@@ -532,7 +550,7 @@ Hindi: कल मिलते हैं।</textarea>
                 backgroundColor: null
             }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'Top-3-Daily-English-2Row.png';
+                link.download = 'ForX-Learner-English-Studio.png';
                 link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
             });
